@@ -1,6 +1,4 @@
-
 <!DOCTYPE html>
-
 <html>
 
 <head>
@@ -37,6 +35,21 @@ border:1px solid #ddd;
 border-radius:8px;
 display:none;
 }
+
+table{
+border-collapse:collapse;
+width:100%;
+}
+
+th,td{
+border:1px solid #ddd;
+padding:8px;
+font-size:13px;
+}
+
+th{
+background:#f2f2f2;
+}
 </style>
 
 </head>
@@ -47,9 +60,11 @@ display:none;
 
 <div class="container">
 
-<label><b>Upload Job Description</b></label><br> <input type="file" id="job_description"><br><br>
+<label><b>Upload Job Description</b></label><br>
+<input type="file" id="job_description"><br><br>
 
-<label><b>Upload Resume</b></label><br> <input type="file" id="resume"><br><br>
+<label><b>Upload Resume(s)</b></label><br>
+<input type="file" id="resume" multiple><br><br>
 
 <button id="submitBtn">Evaluate Candidate</button>
 
@@ -64,16 +79,22 @@ document.getElementById("submitBtn").addEventListener("click", async () => {
 console.log("Button clicked");
 
 const jd = document.getElementById("job_description").files[0];
-const resume = document.getElementById("resume").files[0];
+const resumes = document.getElementById("resume").files;
 
-if(!jd || !resume){
-alert("Please upload both files");
+if(!jd || resumes.length === 0){
+alert("Please upload JD and at least one resume");
 return;
 }
 
 const formData = new FormData();
+
 formData.append("job_description", jd);
-formData.append("resume", resume);
+
+/* Merge resumes under same field name */
+
+for(let i=0;i<resumes.length;i++){
+formData.append("resume", resumes[i]);
+}
 
 console.log("Sending request...");
 
@@ -84,12 +105,16 @@ method:"POST",
 body:formData
 });
 
-const data = await response.json();
+let data = await response.json();
+
+if(!Array.isArray(data)){
+data = [data];
+}
 
 document.getElementById("result").style.display="block";
 
 let table = `
-<table border="1" style="border-collapse:collapse;width:100%">
+<table>
 <tr>
 <th>Name</th>
 <th>Gender</th>
@@ -102,21 +127,28 @@ let table = `
 <th>Similarity</th>
 <th>Similarity 2</th>
 </tr>
-
-<tr>
-<td>${data["Name"] || ""}</td>
-<td>${data["Gender"] || ""}</td>
-<td>${data["Education"] || ""}</td>
-<td>${data["Current Company"] || ""}</td>
-<td>${data["Current Designation"] || ""}</td>
-<td>${data["Total Working Experience"] || ""}</td>
-<td>${data["Relevance Experience"] || ""}</td>
-<td>${data["Key Skills"] || ""}</td>
-<td>${data["Similarity"] || ""}</td>
-<td>${data["Similarity 2"] || ""}</td>
-</tr>
-</table>
 `;
+
+data.forEach(candidate => {
+
+table += `
+<tr>
+<td>${candidate["Name"] || ""}</td>
+<td>${candidate["Gender"] || ""}</td>
+<td>${candidate["Education"] || ""}</td>
+<td>${candidate["Current Company"] || ""}</td>
+<td>${candidate["Current Designation"] || ""}</td>
+<td>${candidate["Total Working Experience"] || ""}</td>
+<td>${candidate["Relevance Experience"] || ""}</td>
+<td>${candidate["Key Skills"] || ""}</td>
+<td>${candidate["Similarity"] || ""}</td>
+<td>${candidate["Similarity 2"] || ""}</td>
+</tr>
+`;
+
+});
+
+table += "</table>";
 
 document.getElementById("result").innerHTML = table;
 
