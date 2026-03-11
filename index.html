@@ -1,22 +1,43 @@
 <!DOCTYPE html>
 <html>
-
 <head>
+
 <title>AI Resume Screening Portal</title>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
 <style>
+
 body{
 font-family: Arial;
-margin:40px;
 background:#f5f6fa;
+margin:0;
+}
+
+.header{
+background:#2c7be5;
+color:white;
+padding:15px;
+font-size:20px;
+text-align:center;
 }
 
 .container{
-max-width:900px;
+max-width:1000px;
+margin:auto;
+margin-top:40px;
 background:white;
 padding:30px;
 border-radius:10px;
-box-shadow:0 4px 10px rgba(0,0,0,0.08);
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+input{
+padding:10px;
+width:100%;
+margin-bottom:15px;
+border:1px solid #ccc;
+border-radius:6px;
 }
 
 button{
@@ -26,18 +47,19 @@ color:white;
 border:none;
 border-radius:6px;
 cursor:pointer;
+margin-right:10px;
 }
 
 button:hover{
 background:#1a5fd1;
 }
 
-#result{
-margin-top:30px;
-padding:20px;
-border:1px solid #ddd;
-border-radius:8px;
+#dashboard{
 display:none;
+}
+
+#result{
+margin-top:25px;
 overflow-x:auto;
 }
 
@@ -56,29 +78,85 @@ text-align:left;
 th{
 background:#f2f2f2;
 }
+
+.login-box{
+max-width:400px;
+margin:auto;
+margin-top:120px;
+background:white;
+padding:30px;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
 </style>
 
 </head>
 
 <body>
 
-<h2>AI Resume Screening Portal</h2>
+<div class="header">AI Resume Screening Portal</div>
 
-<div class="container">
+<!-- LOGIN PAGE -->
 
-<label><b>Upload Job Description</b></label><br>
-<input type="file" id="job_description"><br><br>
+<div id="loginPage" class="login-box">
 
-<label><b>Upload Resume(s)</b></label><br>
-<input type="file" id="resume" multiple><br><br>
+<h3>Login</h3>
+
+<input type="text" id="username" placeholder="Username">
+
+<input type="password" id="password" placeholder="Password">
+
+<button onclick="login()">Login</button>
+
+</div>
+
+<!-- DASHBOARD -->
+
+<div id="dashboard" class="container">
+
+<h3>Upload Job Description & Resumes</h3>
+
+<label><b>Upload Job Description</b></label>
+<input type="file" id="job_description">
+
+<label><b>Upload Resume(s)</b></label>
+<input type="file" id="resume" multiple>
 
 <button id="submitBtn">Evaluate Candidate</button>
+
+<button onclick="downloadExcel()">Download Excel</button>
 
 <div id="result"></div>
 
 </div>
 
+
 <script>
+
+let tableData = [];
+
+function login(){
+
+let user = document.getElementById("username").value;
+let pass = document.getElementById("password").value;
+
+/* simple demo authentication */
+
+if(user === "admin" && pass === "admin123"){
+
+document.getElementById("loginPage").style.display="none";
+document.getElementById("dashboard").style.display="block";
+
+}else{
+
+alert("Invalid login");
+
+}
+
+}
+
+
 
 document.getElementById("submitBtn").addEventListener("click", async () => {
 
@@ -86,17 +164,20 @@ const jd = document.getElementById("job_description").files[0];
 const resumes = document.getElementById("resume").files;
 
 if(!jd || resumes.length === 0){
+
 alert("Please upload both files");
 return;
+
 }
 
 const formData = new FormData();
 
 formData.append("job_description", jd);
 
-/* send multiple resumes */
 for(let i=0;i<resumes.length;i++){
+
 formData.append("resume", resumes[i]);
+
 }
 
 const response = await fetch(
@@ -112,7 +193,7 @@ if(!Array.isArray(data)){
 data=[data];
 }
 
-document.getElementById("result").style.display="block";
+tableData = data;
 
 let table = `
 <table>
@@ -166,6 +247,27 @@ table += "</table>";
 document.getElementById("result").innerHTML = table;
 
 });
+
+
+
+function downloadExcel(){
+
+if(tableData.length === 0){
+
+alert("No data to download");
+return;
+
+}
+
+const worksheet = XLSX.utils.json_to_sheet(tableData);
+
+const workbook = XLSX.utils.book_new();
+
+XLSX.utils.book_append_sheet(workbook, worksheet, "Results");
+
+XLSX.writeFile(workbook, "Candidate_Evaluation.xlsx");
+
+}
 
 </script>
 
