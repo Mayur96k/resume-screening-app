@@ -1,37 +1,51 @@
 <!DOCTYPE html>
+
 <html>
 <head>
 <title>AI Resume Screening Portal</title>
+<style>
+body{
+font-family: Arial;
+margin:40px;
+}
+
+.container{
+max-width:600px;
+padding:30px;
+border:1px solid #ddd;
+border-radius:10px;
+}
+
+button{
+padding:10px 20px;
+background:#2c7be5;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover </style>
+
 </head>
 
-<body style="font-family:Arial">
+<body>
 
 <h2>AI Resume Screening Portal</h2>
 
+<div class="container">
+
 <form action="https://suezppl.app.n8n.cloud/webhook-test/9fdb5c11-569d-4f29-acd2-db49248a700c" method="POST" enctype="multipart/form-data">
 
-<label>Full Name:</label><br>
-<input type="text" name="name" required><br><br>
+<label>Upload Job Description:</label><br><br> <input type="file" name="job_description" accept=".pdf,.doc,.docx" required><br><br><br>
 
-<label>Email:</label><br>
-<input type="email" name="email" required><br><br>
+<label>Upload Resume:</label><br><br> <input type="file" name="resume" accept=".pdf,.doc,.docx" required><br><br><br>
 
-<label>Phone:</label><br>
-<input type="text" name="phone"><br><br>
-
-<label>Job Role:</label><br>
-<select name="Job Role">
-<option value="Data Analyst">Data Analyst</option>
-<option value="Power BI Developer">Power BI Developer</option>
-<option value="AI Engineer">AI Engineer</option>
-</select><br><br>
-
-<label>Upload Resume:</label><br>
-<input type="file" name="resume" accept=".pdf,.doc,.docx" required><br><br>
-
-<button type="submit">Submit Application</button>
+<button type="submit">Submit</button>
 
 </form>
+
+</div>
 
 </body>
 </html>
