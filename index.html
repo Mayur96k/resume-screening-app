@@ -6,7 +6,6 @@
 <title>AI Resume Screening Portal</title>
 
 <style>
-
 body{
 font-family: Arial;
 margin:40px;
@@ -14,7 +13,7 @@ background:#f5f6fa;
 }
 
 .container{
-max-width:1200px;
+max-width:700px;
 background:white;
 padding:30px;
 border-radius:10px;
@@ -22,43 +21,21 @@ box-shadow:0 4px 10px rgba(0,0,0,0.08);
 }
 
 button{
-padding:12px 20px;
+padding:12px 22px;
 background:#2c7be5;
 color:white;
 border:none;
 border-radius:6px;
 cursor:pointer;
-font-size:14px;
 }
 
-button:hover{
-background:#1a5fd1;
-}
-
-table{
-margin-top:25px;
-border-collapse:collapse;
-width:100%;
-font-size:13px;
-}
-
-th,td{
+#result{
+margin-top:30px;
+padding:20px;
 border:1px solid #ddd;
-padding:6px;
-text-align:left;
+border-radius:8px;
+display:none;
 }
-
-th{
-background:#f2f2f2;
-font-weight:bold;
-}
-
-.loading{
-margin-top:20px;
-font-style:italic;
-color:#555;
-}
-
 </style>
 
 </head>
@@ -69,15 +46,11 @@ color:#555;
 
 <div class="container">
 
-<form id="uploadForm" enctype="multipart/form-data">
+<label><b>Upload Job Description</b></label><br> <input type="file" id="job_description"><br><br>
 
-<label><b>Upload Job Description</b></label><br> <input type="file" name="job_description" accept=".pdf,.doc,.docx" required><br><br>
+<label><b>Upload Resume</b></label><br> <input type="file" id="resume"><br><br>
 
-<label><b>Upload Candidate Resumes</b></label><br> <input type="file" name="resume" accept=".pdf,.doc,.docx" multiple required><br><br>
-
-<button type="submit">Evaluate Candidates</button>
-
-</form>
+<button id="submitBtn">Evaluate Candidate</button>
 
 <div id="result"></div>
 
@@ -85,27 +58,23 @@ color:#555;
 
 <script>
 
-document.getElementById("uploadForm").addEventListener("submit", async function(e){
+document.getElementById("submitBtn").addEventListener("click", async () => {
 
-e.preventDefault();
+console.log("Button clicked");
 
-const resultBox = document.getElementById("result");
-resultBox.innerHTML = "<div class='loading'>Processing resumes... please wait.</div>";
+const jd = document.getElementById("job_description").files[0];
+const resume = document.getElementById("resume").files[0];
 
-const formData = new FormData();
-
-// Job Description
-const jdFile = document.querySelector('input[name="job_description"]').files[0];
-formData.append("job_description", jdFile);
-
-// Multiple resumes
-const resumes = document.querySelector('input[name="resume"]').files;
-
-for(let i=0;i<resumes.length;i++){
-formData.append("resume", resumes[i]);
+if(!jd || !resume){
+alert("Please upload both files");
+return;
 }
 
-try{
+const formData = new FormData();
+formData.append("job_description", jd);
+formData.append("resume", resume);
+
+console.log("Sending request...");
 
 const response = await fetch(
 "https://suezppl.app.n8n.cloud/webhook/9fdb5c11-569d-4f29-acd2-db49248a700c",
@@ -114,42 +83,14 @@ method:"POST",
 body:formData
 });
 
-let data = await response.json();
+const data = await response.json();
 
-// Ensure data is array
-if(!Array.isArray(data)){
-data = [data];
-}
+document.getElementById("result").style.display="block";
+document.getElementById("result").innerHTML = JSON.stringify(data,null,2);
 
-let table = `
-<h3>Candidate Evaluation Result</h3>
+});
 
-<table>
+</script>
 
-<tr>
-<th>Name</th>
-<th>Gender</th>
-<th>Education</th>
-<th>Current Company</th>
-<th>Current Designation</th>
-<th>Current Employement Tenure</th>
-<th>Previous Employer</th>
-<th>Previous Designation</th>
-<th>Employement Tenure</th>
-<th>Total Working Experience</th>
-<th>Relevance Experience</th>
-<th>Graduation</th>
-<th>Specialisation</th>
-<th>Post Graduate</th>
-<th>Specialisation PG</th>
-<th>Key Skills</th>
-<th>Similarity</th>
-<th>Similarity 2</th>
-</tr>
-`;
-
-data.forEach(candidate => {
-
-table += `
-<tr>
-<
+</body>
+</html>
