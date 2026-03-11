@@ -67,13 +67,13 @@ font-style:italic;
 
 <div class="container">
 
-<form id="uploadForm" onsubmit="return false;">
+<form id="uploadForm">
 
 <label><b>Upload Job Description</b></label><br> <input type="file" name="job_description" required><br>
 
 <label><b>Upload Resume</b></label><br> <input type="file" name="resume" required><br>
 
-<button type="submit">Evaluate Candidate</button>
+<button type="button" onclick="submitForm()">Evaluate Candidate</button>
 
 </form>
 
@@ -83,13 +83,10 @@ font-style:italic;
 
 <script>
 
+async function submitForm(){
+
 const form = document.getElementById("uploadForm");
-
-form.addEventListener("submit", async function(e){
-
-e.preventDefault();
-
 const resultBox = document.getElementById("result");
 
 resultBox.style.display = "block";
-resultBox.innerHTML
+resultBox.innerHTML = "<di
