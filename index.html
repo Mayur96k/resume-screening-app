@@ -9,7 +9,6 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Inter',Arial,sans-serif;background:#f0f4f8;color:#1a2332;}
 
-/* LOGIN */
 .login-wrap{display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,#1a2f5a 0%,#2c7be5 100%);}
 .login-box{background:white;padding:40px;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.3);width:380px;}
 .login-logo{font-size:24px;font-weight:700;color:#2c7be5;margin-bottom:8px;}
@@ -20,7 +19,6 @@ body{font-family:'Inter',Arial,sans-serif;background:#f0f4f8;color:#1a2332;}
 .login-box button:hover{background:#1a5fd1;}
 .login-error{color:#e53e3e;font-size:13px;margin-top:10px;display:none;}
 
-/* APP LAYOUT */
 #app{display:none;}
 .header{background:white;padding:14px 28px;border-bottom:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
 .logo{font-size:20px;font-weight:700;color:#2c7be5;}
@@ -35,16 +33,12 @@ body{font-family:'Inter',Arial,sans-serif;background:#f0f4f8;color:#1a2332;}
 .sidebar a .icon{font-size:16px;}
 
 .main{margin-left:220px;padding:28px;min-height:calc(100vh - 60px);}
-
-/* PAGES */
 .page{display:none;}
 .page.active{display:block;}
 
-/* CARDS */
 .card{background:white;padding:24px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.07);margin-bottom:22px;}
 .card h3{font-size:16px;font-weight:600;color:#1a2332;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid #f0f4f8;}
 
-/* BUTTONS */
 .btn{padding:10px 18px;border:none;border-radius:7px;cursor:pointer;font-size:13px;font-weight:600;transition:all .15s;}
 .btn-primary{background:#2c7be5;color:white;}
 .btn-primary:hover{background:#1a5fd1;}
@@ -58,46 +52,41 @@ body{font-family:'Inter',Arial,sans-serif;background:#f0f4f8;color:#1a2332;}
 .btn-outline{background:transparent;border:1px solid #2c7be5;color:#2c7be5;}
 .btn-outline:hover{background:#eef4ff;}
 
-/* FORM */
 .form-group{margin-bottom:15px;}
 .form-group label{display:block;font-size:13px;font-weight:500;color:#444;margin-bottom:5px;}
 .form-group input,.form-group select{width:100%;padding:10px 13px;border:1px solid #ddd;border-radius:7px;font-size:14px;outline:none;transition:border .2s;}
 .form-group input:focus,.form-group select:focus{border-color:#2c7be5;}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 
-/* TABLE */
 table{border-collapse:collapse;width:100%;font-size:13px;}
 th,td{border:1px solid #e8edf2;padding:9px 11px;text-align:left;}
 th{background:#f7fafc;font-weight:600;color:#444;font-size:12px;}
 tr:hover td{background:#fafbfc;}
-.topCandidate{background:#f0fff4 !important;}
-.topCandidate td{border-color:#c6f6d5;}
+.topCandidate td{background:#f0fff4 !important;border-color:#c6f6d5;}
 
-/* STATUS BADGES */
+.score-legend{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:16px;padding:10px 16px;background:#f7fafc;border-radius:8px;border:1px solid #e2e8f0;}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;}
+.legend-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
+
 .badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;}
 .badge-active{background:#c6f6d5;color:#276749;}
 .badge-inactive{background:#fed7d7;color:#9b2c2c;}
 .badge-admin{background:#bee3f8;color:#2a69ac;}
 .badge-user{background:#e9d8fd;color:#553c9a;}
 
-/* PROGRESS */
 .progressBar{width:100%;background:#e2e8f0;border-radius:5px;margin-top:8px;}
 .progress{height:8px;width:0%;background:linear-gradient(90deg,#2c7be5,#56cfff);border-radius:5px;transition:width .4s;}
 
-/* MODAL */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:1000;align-items:center;justify-content:center;}
 .modal-overlay.open{display:flex;}
 .modal{background:white;border-radius:12px;padding:30px;width:460px;max-width:95vw;box-shadow:0 20px 60px rgba(0,0,0,0.25);}
 .modal h3{font-size:17px;font-weight:700;margin-bottom:20px;}
 .modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;}
 
-/* ALERT */
 .alert{padding:12px 16px;border-radius:7px;font-size:13px;margin-bottom:16px;}
 .alert-success{background:#c6f6d5;color:#276749;}
 .alert-error{background:#fed7d7;color:#9b2c2c;}
-.alert-info{background:#bee3f8;color:#2a69ac;}
 
-/* STATS */
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:24px;}
 .stat-card{background:white;padding:20px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.07);}
 .stat-num{font-size:28px;font-weight:700;color:#2c7be5;}
@@ -131,7 +120,7 @@ tr:hover td{background:#fafbfc;}
     </div>
   </div>
 
-  <div class="sidebar" id="sidebar">
+  <div class="sidebar">
     <div class="sidebar-section">Main</div>
     <a class="active" onclick="showPage('dashboard')"><span class="icon">📊</span> Dashboard</a>
     <a onclick="showPage('upload')"><span class="icon">📤</span> Candidate Upload</a>
@@ -168,7 +157,7 @@ tr:hover td{background:#fafbfc;}
       <div class="card">
         <h3>Quick Start</h3>
         <p style="font-size:14px;color:#555;line-height:1.7;">
-          Use the <strong>Candidate Upload</strong> section to upload a Job Description and multiple resumes. 
+          Use the <strong>Candidate Upload</strong> section to upload a Job Description and multiple resumes.
           The AI will analyze and rank all candidates by fit score. Download results as Excel or view the ranking chart.
         </p>
       </div>
@@ -202,6 +191,12 @@ tr:hover td{background:#fafbfc;}
     <div class="page" id="page-results">
       <div class="card">
         <h3>🏆 Candidate Matching Score (%)</h3>
+        <div class="score-legend">
+          <span style="font-size:12px;font-weight:700;color:#333;">ATS Score Legend:</span>
+          <div class="legend-item"><div class="legend-dot" style="background:#28a745;"></div><span style="color:#155724;">80–100% &nbsp;Excellent</span></div>
+          <div class="legend-item"><div class="legend-dot" style="background:#ffc107;"></div><span style="color:#856404;">60–79% &nbsp;Good</span></div>
+          <div class="legend-item"><div class="legend-dot" style="background:#dc3545;"></div><span style="color:#721c24;">0–59% &nbsp;Low</span></div>
+        </div>
         <div style="max-width:640px;height:300px;">
           <canvas id="chart"></canvas>
         </div>
@@ -220,7 +215,7 @@ tr:hover td{background:#fafbfc;}
       </div>
     </div>
 
-    <!-- USER MANAGEMENT (ADMIN ONLY) -->
+    <!-- USER MANAGEMENT -->
     <div class="page" id="page-userManagement">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
@@ -230,15 +225,7 @@ tr:hover td{background:#fafbfc;}
         <div id="userAlert"></div>
         <table>
           <thead>
-            <tr>
-              <th>#</th>
-              <th>Username</th>
-              <th>Full Name</th>
-              <th>Role</th>
-              <th>Status</th>
-              <th>Created</th>
-              <th>Actions</th>
-            </tr>
+            <tr><th>#</th><th>Username</th><th>Full Name</th><th>Role</th><th>Status</th><th>Created</th><th>Actions</th></tr>
           </thead>
           <tbody id="userTableBody"></tbody>
         </table>
@@ -285,16 +272,16 @@ tr:hover td{background:#fafbfc;}
     </div>
     <div class="modal-actions">
       <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-primary" id="modalSaveBtn" onclick="saveUser()">Save User</button>
+      <button class="btn btn-primary" onclick="saveUser()">Save User</button>
     </div>
   </div>
 </div>
 
-<!-- CONFIRM DELETE MODAL -->
+<!-- DELETE MODAL -->
 <div class="modal-overlay" id="deleteModal">
   <div class="modal" style="width:380px;">
     <h3>⚠️ Delete User</h3>
-    <p style="font-size:14px;color:#555;margin-bottom:20px;">Are you sure you want to delete user <strong id="deleteUserName"></strong>? This action cannot be undone.</p>
+    <p style="font-size:14px;color:#555;margin-bottom:20px;">Are you sure you want to delete <strong id="deleteUserName"></strong>? This cannot be undone.</p>
     <div class="modal-actions">
       <button class="btn btn-outline" onclick="closeDeleteModal()">Cancel</button>
       <button class="btn btn-danger" onclick="confirmDelete()">Delete</button>
@@ -320,8 +307,6 @@ tr:hover td{background:#fafbfc;}
 
 <script>
 
-// ─── USER STORE ───────────────────────────────────────────────────────────────
-// Stored in localStorage so it persists across page refreshes
 const STORAGE_KEY = 'suez_users_v1';
 
 function loadUsers() {
@@ -329,16 +314,13 @@ function loadUsers() {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) return JSON.parse(raw);
   } catch(e) {}
-  // Default users
   return [
     { id: 1, username: 'admin', password: 'admin123', fullName: 'Super Admin', role: 'admin', status: 'active', created: '2024-01-01' },
     { id: 2, username: 'hr1', password: 'hr1234', fullName: 'HR Manager', role: 'user', status: 'active', created: '2024-01-15' }
   ];
 }
 
-function saveUsers(users) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(users));
-}
+function saveUsers(u) { localStorage.setItem(STORAGE_KEY, JSON.stringify(u)); }
 
 let users = loadUsers();
 let currentUser = null;
@@ -348,7 +330,14 @@ let resettingUserId = null;
 let tableData = [];
 let chartInstance = null;
 
-// ─── AUTH ─────────────────────────────────────────────────────────────────────
+// ── ATS SCORE COLOR HELPER ───────────────────────────────────────────────────
+function getScoreStyle(score) {
+  if (score >= 80) return { bg:'#d4edda', color:'#155724', border:'#28a745', barColor:'#28a745', label:'Excellent' };
+  if (score >= 60) return { bg:'#fff3cd', color:'#856404', border:'#ffc107', barColor:'#ffc107', label:'Good'      };
+  return               { bg:'#f8d7da', color:'#721c24', border:'#dc3545', barColor:'#dc3545', label:'Low'       };
+}
+
+// ── AUTH ─────────────────────────────────────────────────────────────────────
 function login() {
   const u = document.getElementById('username').value.trim();
   const p = document.getElementById('password').value;
@@ -364,10 +353,7 @@ function login() {
   }
 }
 
-function logout() {
-  currentUser = null;
-  location.reload();
-}
+function logout() { currentUser = null; location.reload(); }
 
 function initApp() {
   document.getElementById('welcomeName').innerText = currentUser.fullName || currentUser.username;
@@ -377,28 +363,22 @@ function initApp() {
     document.getElementById('adminNav').style.display = 'block';
     document.getElementById('userMgmtNav').style.display = 'flex';
     document.getElementById('statUsers').innerText = users.length;
-  } else {
-    document.getElementById('statUsers').innerText = '—';
   }
 }
 
-// ─── NAVIGATION ───────────────────────────────────────────────────────────────
+// ── NAVIGATION ───────────────────────────────────────────────────────────────
 function showPage(name) {
-  if (name === 'userManagement' && currentUser.role !== 'admin') {
-    alert('Access denied.');
-    return;
-  }
+  if (name === 'userManagement' && currentUser.role !== 'admin') { alert('Access denied.'); return; }
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
   document.getElementById('page-' + name).classList.add('active');
-  // highlight sidebar
   document.querySelectorAll('.sidebar a').forEach(a => {
     if (a.getAttribute('onclick') && a.getAttribute('onclick').includes(name)) a.classList.add('active');
   });
   if (name === 'userManagement') renderUserTable();
 }
 
-// ─── UPLOAD & ANALYSIS ────────────────────────────────────────────────────────
+// ── UPLOAD & ANALYSIS ────────────────────────────────────────────────────────
 function updateProgress(p, t) {
   document.getElementById('progressBar').style.width = p + '%';
   document.getElementById('status').innerText = t;
@@ -410,7 +390,7 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
   if (!jd || resumes.length === 0) { alert('Upload JD and resumes'); return; }
 
   let seconds = 0;
-  const timer = setInterval(() => { seconds++; document.getElementById('timer').innerText = seconds; }, 1000);
+  const timerEl = setInterval(() => { seconds++; document.getElementById('timer').innerText = seconds; }, 1000);
 
   updateProgress(20, 'Uploading resumes...');
   const formData = new FormData();
@@ -424,19 +404,22 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
   );
   let data = await response.json();
   updateProgress(80, 'Generating ranking...');
-  clearInterval(timer);
+  clearInterval(timerEl);
 
   if (!Array.isArray(data)) data = [data];
+
+  // Normalize score to 0–100, cap at 100
   data.forEach(c => {
     let raw = c['overall_fit_score'] || c['Similarity'] || 0;
-    // If value is already in 0–100 range, use as-is; if 0–1 range, multiply by 100
     c.score = Math.min(100, Math.round(raw > 1 ? raw : raw * 100));
   });
+
+  // Sort by normalized score descending — drives both rank and chart order
   data.sort((a, b) => b.score - a.score);
   tableData = data;
 
   document.getElementById('statCandidates').innerText = data.length;
-  document.getElementById('statTopScore').innerText = (data[0] ? data[0].score + '%' : '—');
+  document.getElementById('statTopScore').innerText = data[0] ? data[0].score + '%' : '—';
 
   showPage('results');
   renderTable(data);
@@ -444,16 +427,26 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
   updateProgress(100, 'Completed ✓');
 });
 
+// ── TABLE WITH ATS COLOR BADGES ───────────────────────────────────────────────
 function renderTable(data) {
-  let html = `<table><tr>
-    <th>Rank</th><th>Name</th><th>Current Company</th><th>Current Designation</th>
-    <th>Previous Employer</th><th>Previous Designation</th><th>Total Experience</th>
-    <th>Relevance Exp</th><th>Fit Score</th><th>Final Notes</th>
-  </tr>`;
+  let html = `<table>
+    <tr>
+      <th style="text-align:center;">Rank</th>
+      <th>Name</th>
+      <th>Current Company</th>
+      <th>Current Designation</th>
+      <th>Previous Employer</th>
+      <th>Previous Designation</th>
+      <th>Total Experience</th>
+      <th>Relevance Exp</th>
+      <th style="text-align:center;">Fit Score</th>
+      <th>Final Notes</th>
+    </tr>`;
 
   data.forEach((c, i) => {
-    html += `<tr class="${i===0?'topCandidate':''}">
-      <td>${i+1}</td>
+    const s = getScoreStyle(c.score);
+    html += `<tr class="${i === 0 ? 'topCandidate' : ''}">
+      <td style="text-align:center;font-size:16px;font-weight:800;color:#2c7be5;">#${i + 1}</td>
       <td><strong>${c['Name'] || ''}</strong></td>
       <td>${c['Current Company'] || ''}</td>
       <td>${c['Current Designation'] || ''}</td>
@@ -461,8 +454,20 @@ function renderTable(data) {
       <td>${c['Previous Designation'] || ''}</td>
       <td>${c['Total Working Experience'] || ''}</td>
       <td>${c['Relevance Experience'] || ''}</td>
-      <td><strong>${c['Overall Fit Score'] || 0}%</strong></td>
-      <td style="max-width:200px;font-size:12px;">${c['Final Notes'] || ''}</td>
+      <td style="text-align:center;">
+        <div style="
+          display:inline-flex;flex-direction:column;align-items:center;gap:4px;
+          background:${s.bg};border:1.5px solid ${s.border};border-radius:10px;
+          padding:7px 13px;min-width:88px;
+        ">
+          <span style="font-size:17px;font-weight:800;color:${s.color};line-height:1;">${c.score}%</span>
+          <span style="font-size:10px;font-weight:700;color:${s.color};text-transform:uppercase;letter-spacing:0.5px;">${s.label}</span>
+          <div style="width:64px;height:5px;background:rgba(0,0,0,0.08);border-radius:4px;overflow:hidden;">
+            <div style="width:${c.score}%;height:100%;background:${s.barColor};border-radius:4px;transition:width 0.6s;"></div>
+          </div>
+        </div>
+      </td>
+      <td style="max-width:200px;font-size:12px;color:#555;">${c['final_notes'] || c['Final Notes'] || ''}</td>
     </tr>`;
   });
 
@@ -470,83 +475,85 @@ function renderTable(data) {
   document.getElementById('result').innerHTML = html;
 }
 
+// ── BAR CHART WITH ATS COLORS ────────────────────────────────────────────────
 function drawChart(data) {
+  if (chartInstance) chartInstance.destroy();
 
-  if (chartInstance) {
-    chartInstance.destroy();
-  }
+  const bgColors = data.map(c => c.score >= 80 ? '#28a745' : c.score >= 60 ? '#ffc107' : '#dc3545');
+  const borderColors = data.map(c => c.score >= 80 ? '#1e7e34' : c.score >= 60 ? '#d39e00' : '#c82333');
 
   chartInstance = new Chart(document.getElementById('chart'), {
     type: 'bar',
     data: {
       labels: data.map(x => x['Name']),
       datasets: [{
-        label: 'Matching Score (%)',
-        data: data.map(x => x['Overall Fit Score'] || 0),
-        backgroundColor: '#2c7be5',
-        borderRadius: 5
+        label: 'Fit Score (%)',
+        data: data.map(x => x.score),
+        backgroundColor: bgColors,
+        borderColor: borderColors,
+        borderWidth: 1.5,
+        borderRadius: 6,
+        borderSkipped: false
       }]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      scales: {
-        y: {
-          beginAtZero: true,
-          max: 100,
-          ticks: {
-            callback: v => v + '%'
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => {
+              const score = ctx.raw;
+              const tag = score >= 80 ? '🟢 Excellent' : score >= 60 ? '🟠 Good' : '🔴 Low';
+              return ` ${score}%  — ${tag}`;
+            }
           }
         }
+      },
+      scales: {
+        y: {
+          beginAtZero: true, max: 100,
+          ticks: { callback: v => v + '%' },
+          grid: { color: '#f0f0f0' }
+        },
+        x: { grid: { display: false } }
       }
     }
   });
 }
 
+// ── EXCEL DOWNLOAD ───────────────────────────────────────────────────────────
 function downloadExcel() {
-
-  if (!tableData || !tableData.length) {
-    alert('No data to download. Run analysis first.');
-    return;
-  }
-
-  const excelData = tableData.map(c => ({
+  if (!tableData.length) { alert('No data to download. Run analysis first.'); return; }
+  const excelData = tableData.map((c, i) => ({
+    'Rank': i + 1,
     'Name': c['Name'] || '',
+    'Fit Score (%)': c.score,
+    'Score Rating': c.score >= 80 ? 'Excellent' : c.score >= 60 ? 'Good' : 'Low',
     'Education': c['Education'] || '',
-
     'Current Company': c['Current Company'] || '',
     'Current Designation': c['Current Designation'] || '',
-    'Current Employment Tenure': c['Current Employment Tenure'] || '',
-
+    'Current Employment Tenure': c['Current Employement Tenure'] || '',
     'Previous Employer': c['Previous Employer'] || '',
     'Previous Designation': c['Previous Designation'] || '',
-
-    'Employment Tenure': c['Employment Tenure'] || '',
-
+    'Employment Tenure': c['Employement Tenure'] || '',
     'Total Working Experience': c['Total Working Experience'] || '',
     'Relevance Experience': c['Relevance Experience'] || '',
-
     'Graduation': c['Graduation'] || '',
     'Post Graduate': c['Post Graduate'] || '',
-
     'Key Skills': c['Key Skills'] || '',
-
-    'Overall Fit Score': c['Overall Fit Score'] || '',
-
-    'Strengths': c['Strengths'] || '',
-    'Concerns/Gaps': c['Concerns/Gaps'] || '',
-    'Final Notes': c['Final Notes'] || ''
+    'Strengths': c['strengths'] || c['Strengths'] || '',
+    'Concerns/Gaps': c['concerns_or_gaps'] || c['Concerns/Gaps'] || '',
+    'Final Notes': c['final_notes'] || c['Final Notes'] || ''
   }));
-
   const ws = XLSX.utils.json_to_sheet(excelData);
-
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, 'Candidates');
-
   XLSX.writeFile(wb, 'Candidate_AI_Screening.xlsx');
 }
 
-// ─── USER MANAGEMENT ─────────────────────────────────────────────────────────
+// ── USER MANAGEMENT ──────────────────────────────────────────────────────────
 function renderUserTable() {
   users = loadUsers();
   const tbody = document.getElementById('userTableBody');
@@ -560,7 +567,7 @@ function renderUserTable() {
       <td><span class="badge ${u.status === 'active' ? 'badge-active' : 'badge-inactive'}">${u.status}</span></td>
       <td>${u.created || '—'}</td>
       <td style="white-space:nowrap;">
-        <button class="btn btn-outline btn-sm" onclick="openEditUser(${u.id})" ${u.id === 1 && currentUser.id !== 1 ? 'disabled' : ''}>Edit</button>
+        <button class="btn btn-outline btn-sm" onclick="openEditUser(${u.id})">Edit</button>
         <button class="btn btn-warning btn-sm" style="margin:0 4px;" onclick="openResetPassword(${u.id})">Reset Pwd</button>
         <button class="btn btn-danger btn-sm" onclick="openDeleteUser(${u.id})" ${u.id === currentUser.id ? 'disabled title="Cannot delete yourself"' : ''}>Delete</button>
       </td>
@@ -571,9 +578,7 @@ function renderUserTable() {
 function openAddUser() {
   editingUserId = null;
   document.getElementById('modalTitle').innerText = 'Add New User';
-  document.getElementById('modalUsername').value = '';
-  document.getElementById('modalFullName').value = '';
-  document.getElementById('modalPassword').value = '';
+  ['modalUsername','modalFullName','modalPassword'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('modalRole').value = 'user';
   document.getElementById('modalStatus').value = 'active';
   document.getElementById('modalUsername').disabled = false;
@@ -605,15 +610,10 @@ function saveUser() {
   const role = document.getElementById('modalRole').value;
   const status = document.getElementById('modalStatus').value;
 
-  if (!username || !fullName) {
-    showModalAlert('Username and Full Name are required.', 'error'); return;
-  }
-  if (!editingUserId && !password) {
-    showModalAlert('Password is required for new users.', 'error'); return;
-  }
+  if (!username || !fullName) { showModalAlert('Username and Full Name are required.', 'error'); return; }
+  if (!editingUserId && !password) { showModalAlert('Password is required for new users.', 'error'); return; }
 
   users = loadUsers();
-
   if (editingUserId) {
     const idx = users.findIndex(x => x.id === editingUserId);
     if (idx === -1) return;
@@ -622,22 +622,13 @@ function saveUser() {
     users[idx].status = status;
     if (password) users[idx].password = password;
     saveUsers(users);
-    closeModal();
-    renderUserTable();
+    closeModal(); renderUserTable();
     showUserAlert('User updated successfully.', 'success');
   } else {
-    if (users.find(x => x.username === username)) {
-      showModalAlert('Username already exists.', 'error'); return;
-    }
-    const newUser = {
-      id: Date.now(),
-      username, fullName, password, role, status,
-      created: new Date().toISOString().split('T')[0]
-    };
-    users.push(newUser);
+    if (users.find(x => x.username === username)) { showModalAlert('Username already exists.', 'error'); return; }
+    users.push({ id: Date.now(), username, fullName, password, role, status, created: new Date().toISOString().split('T')[0] });
     saveUsers(users);
-    closeModal();
-    renderUserTable();
+    closeModal(); renderUserTable();
     showUserAlert('User created successfully.', 'success');
     document.getElementById('statUsers').innerText = users.length;
   }
@@ -652,11 +643,9 @@ function openDeleteUser(id) {
 }
 
 function confirmDelete() {
-  users = loadUsers();
-  users = users.filter(x => x.id !== deletingUserId);
+  users = loadUsers().filter(x => x.id !== deletingUserId);
   saveUsers(users);
-  closeDeleteModal();
-  renderUserTable();
+  closeDeleteModal(); renderUserTable();
   showUserAlert('User deleted.', 'success');
   document.getElementById('statUsers').innerText = users.length;
 }
@@ -685,14 +674,13 @@ function closeDeleteModal() { document.getElementById('deleteModal').classList.r
 function closeResetModal() { document.getElementById('resetModal').classList.remove('open'); }
 
 function showModalAlert(msg, type) {
-  document.getElementById('modalAlert').innerHTML = `<div class="alert alert-${type==='error'?'error':'success'}">${msg}</div>`;
+  document.getElementById('modalAlert').innerHTML = `<div class="alert alert-${type === 'error' ? 'error' : 'success'}">${msg}</div>`;
 }
 function showUserAlert(msg, type) {
-  document.getElementById('userAlert').innerHTML = `<div class="alert alert-${type==='error'?'error':'success'}">${msg}</div>`;
+  document.getElementById('userAlert').innerHTML = `<div class="alert alert-${type === 'error' ? 'error' : 'success'}">${msg}</div>`;
   setTimeout(() => { document.getElementById('userAlert').innerHTML = ''; }, 3000);
 }
 
-// Close modals on overlay click
 document.querySelectorAll('.modal-overlay').forEach(el => {
   el.addEventListener('click', function(e) { if (e.target === this) this.classList.remove('open'); });
 });
@@ -700,7 +688,3 @@ document.querySelectorAll('.modal-overlay').forEach(el => {
 </script>
 </body>
 </html>
-
-
-
-
