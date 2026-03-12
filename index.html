@@ -450,35 +450,55 @@ function renderTable(data) {
     <th>Previous Employer</th><th>Previous Designation</th><th>Total Experience</th>
     <th>Relevance Exp</th><th>Fit Score</th><th>Final Notes</th>
   </tr>`;
+
   data.forEach((c, i) => {
     html += `<tr class="${i===0?'topCandidate':''}">
       <td>${i+1}</td>
-      <td><strong>${c['Name']||''}</strong></td>
-      <td>${c['Current Company']||''}</td>
-      <td>${c['Current Designation']||''}</td>
-      <td>${c['Previous Employer']||''}</td>
-      <td>${c['Previous Designation']||''}</td>
-      <td>${c['Total Working Experience']||''}</td>
-      <td>${c['Relevance Experience']||''}</td>
-      <td><strong>${c.score}%</strong></td>
-      <td style="max-width:200px;font-size:12px;">${c['final_notes']||''}</td>
+      <td><strong>${c['Name'] || ''}</strong></td>
+      <td>${c['Current Company'] || ''}</td>
+      <td>${c['Current Designation'] || ''}</td>
+      <td>${c['Previous Employer'] || ''}</td>
+      <td>${c['Previous Designation'] || ''}</td>
+      <td>${c['Total Working Experience'] || ''}</td>
+      <td>${c['Relevance Experience'] || ''}</td>
+      <td><strong>${c['Overall Fit Score'] || 0}%</strong></td>
+      <td style="max-width:200px;font-size:12px;">${c['Final Notes'] || ''}</td>
     </tr>`;
   });
+
   html += '</table>';
   document.getElementById('result').innerHTML = html;
 }
 
 function drawChart(data) {
-  if (chartInstance) { chartInstance.destroy(); }
+
+  if (chartInstance) {
+    chartInstance.destroy();
+  }
+
   chartInstance = new Chart(document.getElementById('chart'), {
     type: 'bar',
     data: {
       labels: data.map(x => x['Name']),
-      datasets: [{ label: 'Matching Score (%)', data: data.map(x => x.score), backgroundColor: '#2c7be5', borderRadius: 5 }]
+      datasets: [{
+        label: 'Matching Score (%)',
+        data: data.map(x => x['Overall Fit Score'] || 0),
+        backgroundColor: '#2c7be5',
+        borderRadius: 5
+      }]
     },
     options: {
-      responsive: true, maintainAspectRatio: false,
-      scales: { y: { beginAtZero: true, max: 100, ticks: { callback: v => v + '%' } } }
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 100,
+          ticks: {
+            callback: v => v + '%'
+          }
+        }
+      }
     }
   });
 }
@@ -680,6 +700,7 @@ document.querySelectorAll('.modal-overlay').forEach(el => {
 </script>
 </body>
 </html>
+
 
 
 
