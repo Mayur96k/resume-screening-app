@@ -532,27 +532,62 @@ function drawChart(data) {
 function downloadExcel() {
   if (!tableData.length) { alert('No data to download. Run analysis first.'); return; }
   const excelData = tableData.map((c, i) => ({
-    'Rank': i + 1,
-    'ATS Match': atsColor(c.score).label,
-    'Fit Score (%)': c.score,
-    'Name': c['Name'] || '',
-    'Education': c['Education'] || '',
-    'Current Company': c['Current Company'] || '',
-    'Current Designation': c['Current Designation'] || '',
-    'Current Employment Tenure': c['Current Employement Tenure'] || '',
-    'Previous Employer': c['Previous Employer'] || '',
-    'Previous Designation': c['Previous Designation'] || '',
-    'Employment Tenure': c['Employement Tenure'] || '',
-    'Total Working Experience': c['Total Working Experience'] || '',
-    'Relevance Experience': c['Relevance Experience'] || '',
-    'Graduation': c['Graduation'] || '',
-    'Post Graduate': c['Post Graduate'] || '',
-    'Key Skills': c['Key Skills'] || '',
-    'Strengths': c['strengths'] || '',
-    'Concerns/Gaps': c['concerns_or_gaps'] || '',
-    'Final Notes': c['final_notes'] || c['Final Notes'] || ''
+    // Rank & ATS
+    'Rank'                        : i + 1,
+    'ATS Rating'                  : atsColor(c.score).label,
+    'Fit Score (%)'               : c.score,
+
+    // Identity
+    'Name'                        : c['Name']                           || '',
+    'Gender'                      : c['Gender']                         || '',
+    'Education'                   : c['Education']                      || '',
+
+    // Current Role
+    'Current Company'             : c['Current Company']                || '',
+    'Current Designation'         : c['Current Designation']            || '',
+    'Current Employment Tenure'   : c['Current Employement Tenure']     || '',
+
+    // Previous Role
+    'Previous Employer'           : c['Previous Employer']              || '',
+    'Previous Designation'        : c['Previous Designation']           || '',
+    'Previous Employment Tenure'  : c['Employement Tenure']             || '',
+
+    // Experience
+    'Total Working Experience'    : c['Total Working Experience']       || '',
+    'Relevance Experience'        : c['Relevance Experience']           || '',
+
+    // Education Detail
+    'Graduation'                  : c['Graduation']                     || '',
+    'Specialisation'              : c['Specialisation']                 || '',
+    'Post Graduate'               : c['Post Graduate']                  || '',
+    'Specialisation PG'           : c['Specialisation PG']              || '',
+
+    // Skills & Raw Scores
+    'Key Skills'                  : c['Key Skills']                     || '',
+    'Overall Fit Score (raw)'     : c['Overall Fit Score']              || '',
+    'Similarity Score'            : c['similarity_score']               || '',
+    'Skill Similarity'            : c['skill_similarity']               || '',
+    'Applied Position'            : c['applied_position']               || '',
+
+    // AI Evaluation fields (visible in n8n output)
+    'Recommendation'              : c['recommendation']                 || '',
+    'Required Experience Match'   : c['required_experience_match']      || '',
+    'Skill Match Summary'         : c['skill_match_summary']            || '',
+    'Education & Cert Match'      : c['education_certifications_match'] || '',
+    'Soft Skills Traits'          : c['soft_skills_traits']             || '',
+    'Strengths'                   : c['Strengths']    || c['strengths']          || '',
+    'Concerns / Gaps'             : c['Concerns/Gaps'] || c['concerns_or_gaps']  || '',
+    'Final Notes'                 : c['Final Notes']  || c['final_notes']        || ''
   }));
+
   const ws = XLSX.utils.json_to_sheet(excelData);
+
+  // Auto-fit column widths
+  const colWidths = Object.keys(excelData[0] || {}).map(key => ({
+    wch: Math.min(60, Math.max(key.length + 2, ...excelData.map(r => String(r[key] || '').length)))
+  }));
+  ws['!cols'] = colWidths;
+
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, 'Candidates');
   XLSX.writeFile(wb, 'Candidate_AI_Screening.xlsx');
