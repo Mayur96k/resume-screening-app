@@ -427,7 +427,11 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
   clearInterval(timer);
 
   if (!Array.isArray(data)) data = [data];
-  data.forEach(c => { c.score = Math.round((c['overall_fit_score'] || c['Similarity'] || 0) * 100); });
+  data.forEach(c => {
+    let raw = c['overall_fit_score'] || c['Similarity'] || 0;
+    // If value is already in 0–100 range, use as-is; if 0–1 range, multiply by 100
+    c.score = Math.min(100, Math.round(raw > 1 ? raw : raw * 100));
+  });
   data.sort((a, b) => b.score - a.score);
   tableData = data;
 
