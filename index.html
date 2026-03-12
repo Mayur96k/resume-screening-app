@@ -9,6 +9,7 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Inter',Arial,sans-serif;background:#f0f4f8;color:#1a2332;}
 
+/* LOGIN */
 .login-wrap{display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,#1a2f5a 0%,#2c7be5 100%);}
 .login-box{background:white;padding:40px;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.3);width:380px;}
 .login-logo{font-size:24px;font-weight:700;color:#2c7be5;margin-bottom:8px;}
@@ -19,6 +20,7 @@ body{font-family:'Inter',Arial,sans-serif;background:#f0f4f8;color:#1a2332;}
 .login-box button:hover{background:#1a5fd1;}
 .login-error{color:#e53e3e;font-size:13px;margin-top:10px;display:none;}
 
+/* APP LAYOUT */
 #app{display:none;}
 .header{background:white;padding:14px 28px;border-bottom:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
 .logo{font-size:20px;font-weight:700;color:#2c7be5;}
@@ -33,6 +35,7 @@ body{font-family:'Inter',Arial,sans-serif;background:#f0f4f8;color:#1a2332;}
 .sidebar a .icon{font-size:16px;}
 
 .main{margin-left:220px;padding:28px;min-height:calc(100vh - 60px);}
+
 .page{display:none;}
 .page.active{display:block;}
 
@@ -59,14 +62,8 @@ body{font-family:'Inter',Arial,sans-serif;background:#f0f4f8;color:#1a2332;}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 
 table{border-collapse:collapse;width:100%;font-size:13px;}
-th,td{border:1px solid #e8edf2;padding:9px 11px;text-align:left;}
+th,td{border:1px solid #e8edf2;padding:9px 11px;text-align:left;vertical-align:middle;}
 th{background:#f7fafc;font-weight:600;color:#444;font-size:12px;}
-tr:hover td{background:#fafbfc;}
-.topCandidate td{background:#f0fff4 !important;border-color:#c6f6d5;}
-
-.score-legend{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:16px;padding:10px 16px;background:#f7fafc;border-radius:8px;border:1px solid #e2e8f0;}
-.legend-item{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;}
-.legend-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
 
 .badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;}
 .badge-active{background:#c6f6d5;color:#276749;}
@@ -91,6 +88,23 @@ tr:hover td{background:#fafbfc;}
 .stat-card{background:white;padding:20px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.07);}
 .stat-num{font-size:28px;font-weight:700;color:#2c7be5;}
 .stat-label{font-size:12px;color:#777;margin-top:4px;}
+
+/* ATS score bar */
+.score-wrap{display:flex;align-items:center;gap:8px;}
+.score-bar-bg{background:#e9ecef;border-radius:20px;width:70px;height:9px;overflow:hidden;flex-shrink:0;}
+.score-bar-fill{height:100%;border-radius:20px;}
+.score-pct{font-weight:700;font-size:13px;min-width:36px;}
+
+/* ATS badge */
+.ats-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;border:1px solid transparent;white-space:nowrap;}
+
+/* ATS legend */
+.ats-legend{display:flex;gap:18px;flex-wrap:wrap;align-items:center;margin-top:12px;}
+.ats-legend-item{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;}
+.ats-dot{width:11px;height:11px;border-radius:50%;}
+
+/* Rank medal */
+.rank-medal{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-weight:700;font-size:12px;}
 
 @media(max-width:900px){.stats-grid{grid-template-columns:repeat(2,1fr);}}
 </style>
@@ -157,16 +171,24 @@ tr:hover td{background:#fafbfc;}
       <div class="card">
         <h3>Quick Start</h3>
         <p style="font-size:14px;color:#555;line-height:1.7;">
-          Use the <strong>Candidate Upload</strong> section to upload a Job Description and multiple resumes.
+          Use <strong>Candidate Upload</strong> to upload a Job Description and multiple resumes.
           The AI will analyze and rank all candidates by fit score. Download results as Excel or view the ranking chart.
         </p>
+        <div style="margin-top:16px;padding-top:14px;border-top:1px solid #f0f4f8;">
+          <div style="font-size:12px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;">ATS Score Legend</div>
+          <div class="ats-legend">
+            <div class="ats-legend-item"><div class="ats-dot" style="background:#28a745;"></div><span style="color:#155724;">80–100% &nbsp;Strong Match</span></div>
+            <div class="ats-legend-item"><div class="ats-dot" style="background:#ffc107;"></div><span style="color:#856404;">60–79% &nbsp;Moderate Match</span></div>
+            <div class="ats-legend-item"><div class="ats-dot" style="background:#dc3545;"></div><span style="color:#721c24;">0–59% &nbsp;Weak Match</span></div>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- UPLOAD -->
     <div class="page" id="page-upload">
       <div class="card">
-        <h3>📤 Upload Job Description & Resumes</h3>
+        <h3>📤 Upload Job Description &amp; Resumes</h3>
         <div class="form-group">
           <label>Job Description (PDF/DOC)</label>
           <input type="file" id="job_description">
@@ -191,14 +213,13 @@ tr:hover td{background:#fafbfc;}
     <div class="page" id="page-results">
       <div class="card">
         <h3>🏆 Candidate Matching Score (%)</h3>
-        <div class="score-legend">
-          <span style="font-size:12px;font-weight:700;color:#333;">ATS Score Legend:</span>
-          <div class="legend-item"><div class="legend-dot" style="background:#28a745;"></div><span style="color:#155724;">80–100% &nbsp;Excellent</span></div>
-          <div class="legend-item"><div class="legend-dot" style="background:#ffc107;"></div><span style="color:#856404;">60–79% &nbsp;Good</span></div>
-          <div class="legend-item"><div class="legend-dot" style="background:#dc3545;"></div><span style="color:#721c24;">0–59% &nbsp;Low</span></div>
-        </div>
         <div style="max-width:640px;height:300px;">
           <canvas id="chart"></canvas>
+        </div>
+        <div class="ats-legend" style="margin-top:14px;">
+          <div class="ats-legend-item"><div class="ats-dot" style="background:#28a745;"></div><span style="color:#155724;">80–100 Strong</span></div>
+          <div class="ats-legend-item"><div class="ats-dot" style="background:#ffc107;"></div><span style="color:#856404;">60–79 Moderate</span></div>
+          <div class="ats-legend-item"><div class="ats-dot" style="background:#dc3545;"></div><span style="color:#721c24;">0–59 Weak</span></div>
         </div>
       </div>
       <div class="card">
@@ -241,35 +262,14 @@ tr:hover td{background:#fafbfc;}
     <h3 id="modalTitle">Add New User</h3>
     <div id="modalAlert"></div>
     <div class="form-row">
-      <div class="form-group">
-        <label>Username *</label>
-        <input id="modalUsername" placeholder="e.g. john.doe" autocomplete="off">
-      </div>
-      <div class="form-group">
-        <label>Full Name *</label>
-        <input id="modalFullName" placeholder="e.g. John Doe">
-      </div>
+      <div class="form-group"><label>Username *</label><input id="modalUsername" placeholder="e.g. john.doe" autocomplete="off"></div>
+      <div class="form-group"><label>Full Name *</label><input id="modalFullName" placeholder="e.g. John Doe"></div>
     </div>
     <div class="form-row">
-      <div class="form-group">
-        <label>Password *</label>
-        <input id="modalPassword" type="password" placeholder="Set password" autocomplete="new-password">
-      </div>
-      <div class="form-group">
-        <label>Role *</label>
-        <select id="modalRole">
-          <option value="user">User</option>
-          <option value="admin">Admin</option>
-        </select>
-      </div>
+      <div class="form-group"><label>Password *</label><input id="modalPassword" type="password" placeholder="Set password" autocomplete="new-password"></div>
+      <div class="form-group"><label>Role *</label><select id="modalRole"><option value="user">User</option><option value="admin">Admin</option></select></div>
     </div>
-    <div class="form-group">
-      <label>Status</label>
-      <select id="modalStatus">
-        <option value="active">Active</option>
-        <option value="inactive">Inactive</option>
-      </select>
-    </div>
+    <div class="form-group"><label>Status</label><select id="modalStatus"><option value="active">Active</option><option value="inactive">Inactive</option></select></div>
     <div class="modal-actions">
       <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
       <button class="btn btn-primary" onclick="saveUser()">Save User</button>
@@ -294,10 +294,7 @@ tr:hover td{background:#fafbfc;}
   <div class="modal" style="width:380px;">
     <h3>🔑 Reset Password</h3>
     <p style="font-size:13px;color:#555;margin-bottom:14px;">Set a new password for <strong id="resetUserName"></strong></p>
-    <div class="form-group">
-      <label>New Password *</label>
-      <input id="resetPassword" type="password" placeholder="New password" autocomplete="new-password">
-    </div>
+    <div class="form-group"><label>New Password *</label><input id="resetPassword" type="password" placeholder="New password" autocomplete="new-password"></div>
     <div class="modal-actions">
       <button class="btn btn-outline" onclick="closeResetModal()">Cancel</button>
       <button class="btn btn-warning" onclick="confirmReset()">Reset Password</button>
@@ -306,7 +303,24 @@ tr:hover td{background:#fafbfc;}
 </div>
 
 <script>
+// ─── ATS SCORE HELPER ────────────────────────────────────────────────────────
+function atsColor(score) {
+  if (score >= 80) return { bg:'#d4edda', color:'#155724', border:'#28a745', label:'Strong',   emoji:'🟢' };
+  if (score >= 60) return { bg:'#fff3cd', color:'#856404', border:'#ffc107', label:'Moderate', emoji:'🟠' };
+  return                  { bg:'#f8d7da', color:'#721c24', border:'#dc3545', label:'Weak',     emoji:'🔴' };
+}
 
+function rankMedal(i) {
+  const styles = [
+    'background:#FFD700;color:#7a5c00;',
+    'background:#C0C0C0;color:#444;',
+    'background:#cd7f32;color:#fff;'
+  ];
+  const s = i < 3 ? styles[i] : 'background:#e9ecef;color:#555;';
+  return `<span class="rank-medal" style="${s}">${i+1}</span>`;
+}
+
+// ─── USER STORE ───────────────────────────────────────────────────────────────
 const STORAGE_KEY = 'suez_users_v1';
 
 function loadUsers() {
@@ -315,8 +329,8 @@ function loadUsers() {
     if (raw) return JSON.parse(raw);
   } catch(e) {}
   return [
-    { id: 1, username: 'admin', password: 'admin123', fullName: 'Super Admin', role: 'admin', status: 'active', created: '2024-01-01' },
-    { id: 2, username: 'hr1', password: 'hr1234', fullName: 'HR Manager', role: 'user', status: 'active', created: '2024-01-15' }
+    { id:1, username:'admin', password:'admin123', fullName:'Super Admin', role:'admin', status:'active', created:'2024-01-01' },
+    { id:2, username:'hr1',   password:'hr1234',   fullName:'HR Manager',  role:'user',  status:'active', created:'2024-01-15' }
   ];
 }
 
@@ -330,14 +344,7 @@ let resettingUserId = null;
 let tableData = [];
 let chartInstance = null;
 
-// ── ATS SCORE COLOR HELPER ───────────────────────────────────────────────────
-function getScoreStyle(score) {
-  if (score >= 80) return { bg:'#d4edda', color:'#155724', border:'#28a745', barColor:'#28a745', label:'Excellent' };
-  if (score >= 60) return { bg:'#fff3cd', color:'#856404', border:'#ffc107', barColor:'#ffc107', label:'Good'      };
-  return               { bg:'#f8d7da', color:'#721c24', border:'#dc3545', barColor:'#dc3545', label:'Low'       };
-}
-
-// ── AUTH ─────────────────────────────────────────────────────────────────────
+// ─── AUTH ─────────────────────────────────────────────────────────────────────
 function login() {
   const u = document.getElementById('username').value.trim();
   const p = document.getElementById('password').value;
@@ -366,7 +373,7 @@ function initApp() {
   }
 }
 
-// ── NAVIGATION ───────────────────────────────────────────────────────────────
+// ─── NAVIGATION ───────────────────────────────────────────────────────────────
 function showPage(name) {
   if (name === 'userManagement' && currentUser.role !== 'admin') { alert('Access denied.'); return; }
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -378,7 +385,7 @@ function showPage(name) {
   if (name === 'userManagement') renderUserTable();
 }
 
-// ── UPLOAD & ANALYSIS ────────────────────────────────────────────────────────
+// ─── UPLOAD & ANALYSIS ────────────────────────────────────────────────────────
 function updateProgress(p, t) {
   document.getElementById('progressBar').style.width = p + '%';
   document.getElementById('status').innerText = t;
@@ -390,7 +397,7 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
   if (!jd || resumes.length === 0) { alert('Upload JD and resumes'); return; }
 
   let seconds = 0;
-  const timerEl = setInterval(() => { seconds++; document.getElementById('timer').innerText = seconds; }, 1000);
+  const timerInt = setInterval(() => { seconds++; document.getElementById('timer').innerText = seconds; }, 1000);
 
   updateProgress(20, 'Uploading resumes...');
   const formData = new FormData();
@@ -400,21 +407,27 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
   updateProgress(50, 'AI analyzing resumes...');
   const response = await fetch(
     'https://rajesh96k96.app.n8n.cloud/webhook/9fdb5c11-569d-4f29-acd2-db49248a700c',
-    { method: 'POST', body: formData }
+    { method:'POST', body:formData }
   );
   let data = await response.json();
   updateProgress(80, 'Generating ranking...');
-  clearInterval(timerEl);
+  clearInterval(timerInt);
 
   if (!Array.isArray(data)) data = [data];
 
-  // Normalize score to 0–100, cap at 100
+  // Normalize score: read from all possible key names your n8n workflow may send
   data.forEach(c => {
-    let raw = c['overall_fit_score'] || c['Similarity'] || 0;
+    const raw = parseFloat(
+      c['Overall Fit Score'] ||   // n8n mapped column key
+      c['overall_fit_score'] ||   // snake_case fallback
+      c['Similarity']         ||  // similarity fallback
+      0
+    );
+    // If value <= 1 it's a decimal (e.g. 0.72) → multiply by 100; else already a percentage
     c.score = Math.min(100, Math.round(raw > 1 ? raw : raw * 100));
   });
 
-  // Sort by normalized score descending — drives both rank and chart order
+  // Sort descending by score — ensures rank 1 = highest score
   data.sort((a, b) => b.score - a.score);
   tableData = data;
 
@@ -427,11 +440,11 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
   updateProgress(100, 'Completed ✓');
 });
 
-// ── TABLE WITH ATS COLOR BADGES ───────────────────────────────────────────────
+// ─── RENDER TABLE WITH ATS COLORS ─────────────────────────────────────────────
 function renderTable(data) {
-  let html = `<table>
+  let html = `<div style="overflow-x:auto;"><table>
     <tr>
-      <th style="text-align:center;">Rank</th>
+      <th>Rank</th>
       <th>Name</th>
       <th>Current Company</th>
       <th>Current Designation</th>
@@ -439,14 +452,15 @@ function renderTable(data) {
       <th>Previous Designation</th>
       <th>Total Experience</th>
       <th>Relevance Exp</th>
-      <th style="text-align:center;">Fit Score</th>
-      <th>Final Notes</th>
+      <th style="min-width:145px;">Fit Score</th>
+      <th>ATS Match</th>
+      <th style="min-width:180px;">Final Notes</th>
     </tr>`;
 
   data.forEach((c, i) => {
-    const s = getScoreStyle(c.score);
-    html += `<tr class="${i === 0 ? 'topCandidate' : ''}">
-      <td style="text-align:center;font-size:16px;font-weight:800;color:#2c7be5;">#${i + 1}</td>
+    const sc = atsColor(c.score);
+    html += `<tr style="border-left:4px solid ${sc.border};background:${sc.bg}14;">
+      <td>${rankMedal(i)}</td>
       <td><strong>${c['Name'] || ''}</strong></td>
       <td>${c['Current Company'] || ''}</td>
       <td>${c['Current Designation'] || ''}</td>
@@ -454,33 +468,30 @@ function renderTable(data) {
       <td>${c['Previous Designation'] || ''}</td>
       <td>${c['Total Working Experience'] || ''}</td>
       <td>${c['Relevance Experience'] || ''}</td>
-      <td style="text-align:center;">
-        <div style="
-          display:inline-flex;flex-direction:column;align-items:center;gap:4px;
-          background:${s.bg};border:1.5px solid ${s.border};border-radius:10px;
-          padding:7px 13px;min-width:88px;
-        ">
-          <span style="font-size:17px;font-weight:800;color:${s.color};line-height:1;">${c.score}%</span>
-          <span style="font-size:10px;font-weight:700;color:${s.color};text-transform:uppercase;letter-spacing:0.5px;">${s.label}</span>
-          <div style="width:64px;height:5px;background:rgba(0,0,0,0.08);border-radius:4px;overflow:hidden;">
-            <div style="width:${c.score}%;height:100%;background:${s.barColor};border-radius:4px;transition:width 0.6s;"></div>
+      <td>
+        <div class="score-wrap">
+          <div class="score-bar-bg">
+            <div class="score-bar-fill" style="width:${c.score}%;background:${sc.border};"></div>
           </div>
+          <span class="score-pct" style="color:${sc.border};">${c.score}%</span>
         </div>
       </td>
-      <td style="max-width:200px;font-size:12px;color:#555;">${c['final_notes'] || c['Final Notes'] || ''}</td>
+      <td>
+        <span class="ats-badge" style="background:${sc.bg};color:${sc.color};border-color:${sc.border};">
+          ${sc.emoji} ${sc.label}
+        </span>
+      </td>
+      <td style="font-size:12px;color:#555;">${c['final_notes'] || c['Final Notes'] || ''}</td>
     </tr>`;
   });
 
-  html += '</table>';
+  html += '</table></div>';
   document.getElementById('result').innerHTML = html;
 }
 
-// ── BAR CHART WITH ATS COLORS ────────────────────────────────────────────────
+// ─── CHART WITH ATS COLORS ────────────────────────────────────────────────────
 function drawChart(data) {
   if (chartInstance) chartInstance.destroy();
-
-  const bgColors = data.map(c => c.score >= 80 ? '#28a745' : c.score >= 60 ? '#ffc107' : '#dc3545');
-  const borderColors = data.map(c => c.score >= 80 ? '#1e7e34' : c.score >= 60 ? '#d39e00' : '#c82333');
 
   chartInstance = new Chart(document.getElementById('chart'), {
     type: 'bar',
@@ -489,11 +500,8 @@ function drawChart(data) {
       datasets: [{
         label: 'Fit Score (%)',
         data: data.map(x => x.score),
-        backgroundColor: bgColors,
-        borderColor: borderColors,
-        borderWidth: 1.5,
-        borderRadius: 6,
-        borderSkipped: false
+        backgroundColor: data.map(x => atsColor(x.score).border),
+        borderRadius: 5
       }]
     },
     options: {
@@ -503,17 +511,14 @@ function drawChart(data) {
         legend: { display: false },
         tooltip: {
           callbacks: {
-            label: ctx => {
-              const score = ctx.raw;
-              const tag = score >= 80 ? '🟢 Excellent' : score >= 60 ? '🟠 Good' : '🔴 Low';
-              return ` ${score}%  — ${tag}`;
-            }
+            label: ctx => ` ${ctx.raw}% — ${atsColor(ctx.raw).label}`
           }
         }
       },
       scales: {
         y: {
-          beginAtZero: true, max: 100,
+          beginAtZero: true,
+          max: 100,
           ticks: { callback: v => v + '%' },
           grid: { color: '#f0f0f0' }
         },
@@ -523,14 +528,14 @@ function drawChart(data) {
   });
 }
 
-// ── EXCEL DOWNLOAD ───────────────────────────────────────────────────────────
+// ─── DOWNLOAD EXCEL ───────────────────────────────────────────────────────────
 function downloadExcel() {
   if (!tableData.length) { alert('No data to download. Run analysis first.'); return; }
   const excelData = tableData.map((c, i) => ({
     'Rank': i + 1,
-    'Name': c['Name'] || '',
+    'ATS Match': atsColor(c.score).label,
     'Fit Score (%)': c.score,
-    'Score Rating': c.score >= 80 ? 'Excellent' : c.score >= 60 ? 'Good' : 'Low',
+    'Name': c['Name'] || '',
     'Education': c['Education'] || '',
     'Current Company': c['Current Company'] || '',
     'Current Designation': c['Current Designation'] || '',
@@ -543,8 +548,8 @@ function downloadExcel() {
     'Graduation': c['Graduation'] || '',
     'Post Graduate': c['Post Graduate'] || '',
     'Key Skills': c['Key Skills'] || '',
-    'Strengths': c['strengths'] || c['Strengths'] || '',
-    'Concerns/Gaps': c['concerns_or_gaps'] || c['Concerns/Gaps'] || '',
+    'Strengths': c['strengths'] || '',
+    'Concerns/Gaps': c['concerns_or_gaps'] || '',
     'Final Notes': c['final_notes'] || c['Final Notes'] || ''
   }));
   const ws = XLSX.utils.json_to_sheet(excelData);
@@ -553,26 +558,25 @@ function downloadExcel() {
   XLSX.writeFile(wb, 'Candidate_AI_Screening.xlsx');
 }
 
-// ── USER MANAGEMENT ──────────────────────────────────────────────────────────
+// ─── USER MANAGEMENT ─────────────────────────────────────────────────────────
 function renderUserTable() {
   users = loadUsers();
   const tbody = document.getElementById('userTableBody');
-  if (!users.length) { tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#888;">No users found.</td></tr>'; return; }
+  if (!users.length) { tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#888;">No users.</td></tr>'; return; }
   tbody.innerHTML = users.map((u, i) => `
     <tr>
-      <td>${i + 1}</td>
+      <td>${i+1}</td>
       <td><strong>${u.username}</strong></td>
       <td>${u.fullName || '—'}</td>
-      <td><span class="badge ${u.role === 'admin' ? 'badge-admin' : 'badge-user'}">${u.role}</span></td>
-      <td><span class="badge ${u.status === 'active' ? 'badge-active' : 'badge-inactive'}">${u.status}</span></td>
+      <td><span class="badge ${u.role==='admin'?'badge-admin':'badge-user'}">${u.role}</span></td>
+      <td><span class="badge ${u.status==='active'?'badge-active':'badge-inactive'}">${u.status}</span></td>
       <td>${u.created || '—'}</td>
       <td style="white-space:nowrap;">
         <button class="btn btn-outline btn-sm" onclick="openEditUser(${u.id})">Edit</button>
         <button class="btn btn-warning btn-sm" style="margin:0 4px;" onclick="openResetPassword(${u.id})">Reset Pwd</button>
-        <button class="btn btn-danger btn-sm" onclick="openDeleteUser(${u.id})" ${u.id === currentUser.id ? 'disabled title="Cannot delete yourself"' : ''}>Delete</button>
+        <button class="btn btn-danger btn-sm" onclick="openDeleteUser(${u.id})" ${u.id===currentUser.id?'disabled title="Cannot delete yourself"':''}>Delete</button>
       </td>
-    </tr>
-  `).join('');
+    </tr>`).join('');
 }
 
 function openAddUser() {
@@ -588,8 +592,7 @@ function openAddUser() {
 }
 
 function openEditUser(id) {
-  const u = users.find(x => x.id === id);
-  if (!u) return;
+  const u = users.find(x => x.id === id); if (!u) return;
   editingUserId = id;
   document.getElementById('modalTitle').innerText = 'Edit User';
   document.getElementById('modalUsername').value = u.username;
@@ -607,8 +610,8 @@ function saveUser() {
   const username = document.getElementById('modalUsername').value.trim();
   const fullName = document.getElementById('modalFullName').value.trim();
   const password = document.getElementById('modalPassword').value;
-  const role = document.getElementById('modalRole').value;
-  const status = document.getElementById('modalStatus').value;
+  const role     = document.getElementById('modalRole').value;
+  const status   = document.getElementById('modalStatus').value;
 
   if (!username || !fullName) { showModalAlert('Username and Full Name are required.', 'error'); return; }
   if (!editingUserId && !password) { showModalAlert('Password is required for new users.', 'error'); return; }
@@ -616,27 +619,21 @@ function saveUser() {
   users = loadUsers();
   if (editingUserId) {
     const idx = users.findIndex(x => x.id === editingUserId);
-    if (idx === -1) return;
-    users[idx].fullName = fullName;
-    users[idx].role = role;
-    users[idx].status = status;
+    Object.assign(users[idx], { fullName, role, status });
     if (password) users[idx].password = password;
-    saveUsers(users);
-    closeModal(); renderUserTable();
-    showUserAlert('User updated successfully.', 'success');
   } else {
     if (users.find(x => x.username === username)) { showModalAlert('Username already exists.', 'error'); return; }
-    users.push({ id: Date.now(), username, fullName, password, role, status, created: new Date().toISOString().split('T')[0] });
-    saveUsers(users);
-    closeModal(); renderUserTable();
-    showUserAlert('User created successfully.', 'success');
-    document.getElementById('statUsers').innerText = users.length;
+    users.push({ id:Date.now(), username, fullName, password, role, status, created:new Date().toISOString().split('T')[0] });
   }
+  saveUsers(users);
+  closeModal();
+  renderUserTable();
+  showUserAlert(editingUserId ? 'User updated.' : 'User created.', 'success');
+  document.getElementById('statUsers').innerText = users.length;
 }
 
 function openDeleteUser(id) {
-  const u = users.find(x => x.id === id);
-  if (!u) return;
+  const u = users.find(x => x.id === id); if (!u) return;
   deletingUserId = id;
   document.getElementById('deleteUserName').innerText = u.username;
   document.getElementById('deleteModal').classList.add('open');
@@ -645,14 +642,14 @@ function openDeleteUser(id) {
 function confirmDelete() {
   users = loadUsers().filter(x => x.id !== deletingUserId);
   saveUsers(users);
-  closeDeleteModal(); renderUserTable();
+  closeDeleteModal();
+  renderUserTable();
   showUserAlert('User deleted.', 'success');
   document.getElementById('statUsers').innerText = users.length;
 }
 
 function openResetPassword(id) {
-  const u = users.find(x => x.id === id);
-  if (!u) return;
+  const u = users.find(x => x.id === id); if (!u) return;
   resettingUserId = id;
   document.getElementById('resetUserName').innerText = u.username;
   document.getElementById('resetPassword').value = '';
@@ -669,22 +666,21 @@ function confirmReset() {
   showUserAlert('Password reset successfully.', 'success');
 }
 
-function closeModal() { document.getElementById('userModal').classList.remove('open'); }
+function closeModal()       { document.getElementById('userModal').classList.remove('open'); }
 function closeDeleteModal() { document.getElementById('deleteModal').classList.remove('open'); }
-function closeResetModal() { document.getElementById('resetModal').classList.remove('open'); }
+function closeResetModal()  { document.getElementById('resetModal').classList.remove('open'); }
 
 function showModalAlert(msg, type) {
-  document.getElementById('modalAlert').innerHTML = `<div class="alert alert-${type === 'error' ? 'error' : 'success'}">${msg}</div>`;
+  document.getElementById('modalAlert').innerHTML = `<div class="alert alert-${type==='error'?'error':'success'}">${msg}</div>`;
 }
 function showUserAlert(msg, type) {
-  document.getElementById('userAlert').innerHTML = `<div class="alert alert-${type === 'error' ? 'error' : 'success'}">${msg}</div>`;
+  document.getElementById('userAlert').innerHTML = `<div class="alert alert-${type==='error'?'error':'success'}">${msg}</div>`;
   setTimeout(() => { document.getElementById('userAlert').innerHTML = ''; }, 3000);
 }
 
 document.querySelectorAll('.modal-overlay').forEach(el => {
   el.addEventListener('click', function(e) { if (e.target === this) this.classList.remove('open'); });
 });
-
 </script>
 </body>
 </html>
