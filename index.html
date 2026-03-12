@@ -1,465 +1,655 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
 <title>SUEZ AI HR Talent Platform</title>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-
-body{
-font-family:Arial;
-margin:0;
-background:#f4f6f9;
-}
-
-/* HEADER */
-
-.header{
-background:white;
-padding:15px 30px;
-border-bottom:1px solid #ddd;
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-
-.logo{
-font-size:22px;
-font-weight:bold;
-color:#2c7be5;
-}
-
-/* SIDEBAR */
-
-.sidebar{
-position:fixed;
-left:0;
-top:60px;
-width:220px;
-height:100%;
-background:#2c7be5;
-color:white;
-padding:20px;
-}
-
-.sidebar a{
-display:block;
-color:white;
-text-decoration:none;
-padding:10px 0;
-cursor:pointer;
-}
-
-/* MAIN */
-
-.main{
-margin-left:240px;
-padding:30px;
-}
-
-/* CARDS */
-
-.card{
-background:white;
-padding:25px;
-border-radius:8px;
-box-shadow:0 3px 10px rgba(0,0,0,0.08);
-margin-bottom:25px;
-}
-
-button{
-padding:12px 20px;
-background:#2c7be5;
-color:white;
-border:none;
-border-radius:6px;
-cursor:pointer;
-}
-
-button:hover{
-background:#1a5fd1;
-}
-
-input{
-padding:10px;
-width:100%;
-margin-bottom:15px;
-border:1px solid #ccc;
-border-radius:6px;
-}
-
-/* TABLE */
-
-table{
-border-collapse:collapse;
-width:100%;
-font-size:13px;
-}
-
-th,td{
-border:1px solid #ddd;
-padding:6px;
-text-align:left;
-}
-
-th{
-background:#f2f2f2;
-}
-
-.topCandidate{
-background:#e6ffe6;
-}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',Arial,sans-serif;background:#f0f4f8;color:#1a2332;}
 
 /* LOGIN */
+.login-wrap{display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,#1a2f5a 0%,#2c7be5 100%);}
+.login-box{background:white;padding:40px;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.3);width:380px;}
+.login-logo{font-size:24px;font-weight:700;color:#2c7be5;margin-bottom:8px;}
+.login-sub{font-size:13px;color:#888;margin-bottom:28px;}
+.login-box input{width:100%;padding:11px 14px;border:1px solid #ddd;border-radius:7px;font-size:14px;margin-bottom:14px;outline:none;transition:border .2s;}
+.login-box input:focus{border-color:#2c7be5;}
+.login-box button{width:100%;padding:12px;background:#2c7be5;color:white;border:none;border-radius:7px;font-size:15px;font-weight:600;cursor:pointer;}
+.login-box button:hover{background:#1a5fd1;}
+.login-error{color:#e53e3e;font-size:13px;margin-top:10px;display:none;}
 
-.login{
-max-width:400px;
-margin:auto;
-margin-top:150px;
-background:white;
-padding:30px;
-border-radius:8px;
-box-shadow:0 3px 10px rgba(0,0,0,0.1);
-}
+/* APP LAYOUT */
+#app{display:none;}
+.header{background:white;padding:14px 28px;border-bottom:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+.logo{font-size:20px;font-weight:700;color:#2c7be5;}
+.header-right{display:flex;align-items:center;gap:16px;font-size:13px;color:#555;}
+.user-badge{background:#eef4ff;color:#2c7be5;border-radius:20px;padding:5px 14px;font-weight:600;font-size:13px;}
+.admin-badge{background:#fff3e0;color:#e65c00;border-radius:20px;padding:5px 14px;font-weight:600;font-size:12px;}
+
+.sidebar{position:fixed;left:0;top:60px;width:220px;height:calc(100% - 60px);background:#1a2332;padding:20px 0;overflow-y:auto;}
+.sidebar-section{font-size:10px;font-weight:700;color:#4a5568;text-transform:uppercase;letter-spacing:1px;padding:10px 22px 6px;}
+.sidebar a{display:flex;align-items:center;gap:10px;color:#a0aec0;text-decoration:none;padding:10px 22px;cursor:pointer;font-size:14px;transition:all .15s;}
+.sidebar a:hover,.sidebar a.active{background:#2d3748;color:white;}
+.sidebar a .icon{font-size:16px;}
+
+.main{margin-left:220px;padding:28px;min-height:calc(100vh - 60px);}
+
+/* PAGES */
+.page{display:none;}
+.page.active{display:block;}
+
+/* CARDS */
+.card{background:white;padding:24px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.07);margin-bottom:22px;}
+.card h3{font-size:16px;font-weight:600;color:#1a2332;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid #f0f4f8;}
+
+/* BUTTONS */
+.btn{padding:10px 18px;border:none;border-radius:7px;cursor:pointer;font-size:13px;font-weight:600;transition:all .15s;}
+.btn-primary{background:#2c7be5;color:white;}
+.btn-primary:hover{background:#1a5fd1;}
+.btn-success{background:#38a169;color:white;}
+.btn-success:hover{background:#276749;}
+.btn-danger{background:#e53e3e;color:white;}
+.btn-danger:hover{background:#c53030;}
+.btn-warning{background:#dd6b20;color:white;}
+.btn-warning:hover{background:#c05621;}
+.btn-sm{padding:6px 12px;font-size:12px;}
+.btn-outline{background:transparent;border:1px solid #2c7be5;color:#2c7be5;}
+.btn-outline:hover{background:#eef4ff;}
+
+/* FORM */
+.form-group{margin-bottom:15px;}
+.form-group label{display:block;font-size:13px;font-weight:500;color:#444;margin-bottom:5px;}
+.form-group input,.form-group select{width:100%;padding:10px 13px;border:1px solid #ddd;border-radius:7px;font-size:14px;outline:none;transition:border .2s;}
+.form-group input:focus,.form-group select:focus{border-color:#2c7be5;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+
+/* TABLE */
+table{border-collapse:collapse;width:100%;font-size:13px;}
+th,td{border:1px solid #e8edf2;padding:9px 11px;text-align:left;}
+th{background:#f7fafc;font-weight:600;color:#444;font-size:12px;}
+tr:hover td{background:#fafbfc;}
+.topCandidate{background:#f0fff4 !important;}
+.topCandidate td{border-color:#c6f6d5;}
+
+/* STATUS BADGES */
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;}
+.badge-active{background:#c6f6d5;color:#276749;}
+.badge-inactive{background:#fed7d7;color:#9b2c2c;}
+.badge-admin{background:#bee3f8;color:#2a69ac;}
+.badge-user{background:#e9d8fd;color:#553c9a;}
 
 /* PROGRESS */
+.progressBar{width:100%;background:#e2e8f0;border-radius:5px;margin-top:8px;}
+.progress{height:8px;width:0%;background:linear-gradient(90deg,#2c7be5,#56cfff);border-radius:5px;transition:width .4s;}
 
-.progressBar{
-width:100%;
-background:#ddd;
-border-radius:5px;
-}
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:1000;align-items:center;justify-content:center;}
+.modal-overlay.open{display:flex;}
+.modal{background:white;border-radius:12px;padding:30px;width:460px;max-width:95vw;box-shadow:0 20px 60px rgba(0,0,0,0.25);}
+.modal h3{font-size:17px;font-weight:700;margin-bottom:20px;}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;}
 
-.progress{
-height:20px;
-width:0%;
-background:#2c7be5;
-border-radius:5px;
-}
+/* ALERT */
+.alert{padding:12px 16px;border-radius:7px;font-size:13px;margin-bottom:16px;}
+.alert-success{background:#c6f6d5;color:#276749;}
+.alert-error{background:#fed7d7;color:#9b2c2c;}
+.alert-info{background:#bee3f8;color:#2a69ac;}
 
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:24px;}
+.stat-card{background:white;padding:20px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.07);}
+.stat-num{font-size:28px;font-weight:700;color:#2c7be5;}
+.stat-label{font-size:12px;color:#777;margin-top:4px;}
+
+@media(max-width:900px){.stats-grid{grid-template-columns:repeat(2,1fr);}}
 </style>
-
 </head>
-
 <body>
 
-<!-- LOGIN PAGE -->
-
-<div id="loginPage" class="login">
-
-<h2>SUEZ HR Portal</h2>
-
-<input id="username" placeholder="Username">
-<input id="password" type="password" placeholder="Password">
-
-<button onclick="login()">Login</button>
-
+<!-- LOGIN -->
+<div id="loginPage" class="login-wrap">
+  <div class="login-box">
+    <div class="login-logo">SUEZ HR Portal</div>
+    <div class="login-sub">AI-Powered Talent Platform</div>
+    <input id="username" placeholder="Username" autocomplete="username">
+    <input id="password" type="password" placeholder="Password" autocomplete="current-password" onkeydown="if(event.key==='Enter')login()">
+    <button onclick="login()">Sign In</button>
+    <div class="login-error" id="loginError">Invalid username or password.</div>
+  </div>
 </div>
 
+<!-- APP -->
+<div id="app">
+  <div class="header">
+    <div class="logo">⚡ SUEZ AI Talent Platform</div>
+    <div class="header-right">
+      <span id="headerUserBadge" class="user-badge"></span>
+      <span id="headerRoleBadge" class="admin-badge" style="display:none">ADMIN</span>
+      <span style="cursor:pointer;color:#e53e3e;font-weight:600;" onclick="logout()">Logout</span>
+    </div>
+  </div>
 
-<div id="app" style="display:none">
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-section">Main</div>
+    <a class="active" onclick="showPage('dashboard')"><span class="icon">📊</span> Dashboard</a>
+    <a onclick="showPage('upload')"><span class="icon">📤</span> Candidate Upload</a>
+    <a onclick="showPage('results')"><span class="icon">🏆</span> Results</a>
+    <a onclick="showPage('analytics')"><span class="icon">📈</span> Analytics</a>
+    <div class="sidebar-section" id="adminNav" style="display:none">Admin</div>
+    <a id="userMgmtNav" style="display:none" onclick="showPage('userManagement')"><span class="icon">👥</span> User Management</a>
+    <a onclick="logout()"><span class="icon">🚪</span> Logout</a>
+  </div>
 
-<div class="header">
+  <div class="main">
 
-<div class="logo">SUEZ AI Talent Platform</div>
+    <!-- DASHBOARD -->
+    <div class="page active" id="page-dashboard">
+      <h2 style="margin-bottom:20px;font-size:22px;">Welcome back, <span id="welcomeName"></span> 👋</h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-num" id="statCandidates">0</div>
+          <div class="stat-label">Candidates Analyzed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="statTopScore">—</div>
+          <div class="stat-label">Top Match Score</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="statUsers">—</div>
+          <div class="stat-label">Platform Users</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">AI</div>
+          <div class="stat-label">Powered Screening</div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Quick Start</h3>
+        <p style="font-size:14px;color:#555;line-height:1.7;">
+          Use the <strong>Candidate Upload</strong> section to upload a Job Description and multiple resumes. 
+          The AI will analyze and rank all candidates by fit score. Download results as Excel or view the ranking chart.
+        </p>
+      </div>
+    </div>
 
-<div>HR Dashboard</div>
+    <!-- UPLOAD -->
+    <div class="page" id="page-upload">
+      <div class="card">
+        <h3>📤 Upload Job Description & Resumes</h3>
+        <div class="form-group">
+          <label>Job Description (PDF/DOC)</label>
+          <input type="file" id="job_description">
+        </div>
+        <div class="form-group">
+          <label>Resumes (Multiple files allowed)</label>
+          <input type="file" id="resume" multiple>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <button class="btn btn-primary" id="submitBtn">🔍 Analyze Candidates</button>
+          <button class="btn btn-outline" onclick="downloadExcel()">⬇ Download Excel</button>
+        </div>
+        <div style="margin-top:20px;">
+          <div id="status" style="font-size:13px;color:#555;">Waiting...</div>
+          <div style="font-size:12px;color:#888;margin-top:4px;">Elapsed: <span id="timer">0</span> sec</div>
+          <div class="progressBar"><div id="progressBar" class="progress"></div></div>
+        </div>
+      </div>
+    </div>
 
+    <!-- RESULTS -->
+    <div class="page" id="page-results">
+      <div class="card">
+        <h3>🏆 Candidate Matching Score (%)</h3>
+        <div style="max-width:640px;height:300px;">
+          <canvas id="chart"></canvas>
+        </div>
+      </div>
+      <div class="card">
+        <h3>📋 Candidate Results</h3>
+        <div id="result"><p style="color:#888;font-size:13px;">No results yet. Upload and analyze candidates first.</p></div>
+      </div>
+    </div>
+
+    <!-- ANALYTICS -->
+    <div class="page" id="page-analytics">
+      <div class="card">
+        <h3>📈 Analytics</h3>
+        <p style="color:#888;font-size:14px;">Analytics will appear here after running candidate analysis.</p>
+      </div>
+    </div>
+
+    <!-- USER MANAGEMENT (ADMIN ONLY) -->
+    <div class="page" id="page-userManagement">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+          <h3 style="margin:0;border:none;padding:0;">👥 User Management</h3>
+          <button class="btn btn-success btn-sm" onclick="openAddUser()">+ Add User</button>
+        </div>
+        <div id="userAlert"></div>
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Username</th>
+              <th>Full Name</th>
+              <th>Role</th>
+              <th>Status</th>
+              <th>Created</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="userTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
 </div>
 
-
-<div class="sidebar">
-
-<a>Dashboard</a>
-<a>Candidate Upload</a>
-<a>Results</a>
-<a>Analytics</a>
-<a onclick="logout()">Logout</a>
-
+<!-- ADD/EDIT USER MODAL -->
+<div class="modal-overlay" id="userModal">
+  <div class="modal">
+    <h3 id="modalTitle">Add New User</h3>
+    <div id="modalAlert"></div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Username *</label>
+        <input id="modalUsername" placeholder="e.g. john.doe" autocomplete="off">
+      </div>
+      <div class="form-group">
+        <label>Full Name *</label>
+        <input id="modalFullName" placeholder="e.g. John Doe">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Password *</label>
+        <input id="modalPassword" type="password" placeholder="Set password" autocomplete="new-password">
+      </div>
+      <div class="form-group">
+        <label>Role *</label>
+        <select id="modalRole">
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Status</label>
+      <select id="modalStatus">
+        <option value="active">Active</option>
+        <option value="inactive">Inactive</option>
+      </select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" id="modalSaveBtn" onclick="saveUser()">Save User</button>
+    </div>
+  </div>
 </div>
 
-
-<div class="main">
-
-<div class="card">
-
-<h3>Upload Job Description</h3>
-
-<input type="file" id="job_description">
-
-<h3>Upload Resumes</h3>
-
-<input type="file" id="resume" multiple>
-
-<button id="submitBtn">Analyze Candidates</button>
-<button onclick="downloadExcel()">Download Excel</button>
-
-<div style="margin-top:20px">
-
-<div id="status">Waiting...</div>
-
-<div style="margin-top:10px">
-Elapsed Time: <span id="timer">0</span> sec
+<!-- CONFIRM DELETE MODAL -->
+<div class="modal-overlay" id="deleteModal">
+  <div class="modal" style="width:380px;">
+    <h3>⚠️ Delete User</h3>
+    <p style="font-size:14px;color:#555;margin-bottom:20px;">Are you sure you want to delete user <strong id="deleteUserName"></strong>? This action cannot be undone.</p>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeDeleteModal()">Cancel</button>
+      <button class="btn btn-danger" onclick="confirmDelete()">Delete</button>
+    </div>
+  </div>
 </div>
 
-<div class="progressBar">
-<div id="progressBar" class="progress"></div>
+<!-- RESET PASSWORD MODAL -->
+<div class="modal-overlay" id="resetModal">
+  <div class="modal" style="width:380px;">
+    <h3>🔑 Reset Password</h3>
+    <p style="font-size:13px;color:#555;margin-bottom:14px;">Set a new password for <strong id="resetUserName"></strong></p>
+    <div class="form-group">
+      <label>New Password *</label>
+      <input id="resetPassword" type="password" placeholder="New password" autocomplete="new-password">
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeResetModal()">Cancel</button>
+      <button class="btn btn-warning" onclick="confirmReset()">Reset Password</button>
+    </div>
+  </div>
 </div>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<h3>Candidate Matching Score (%)</h3>
-
-<div style="max-width:600px;height:300px">
-<canvas id="chart"></canvas>
-</div>
-
-</div>
-
-
-<div class="card">
-
-<h3>Candidate Results</h3>
-
-<div id="result"></div>
-
-</div>
-
-
-</div>
-
-</div>
-
 
 <script>
 
-let tableData=[]
+// ─── USER STORE ───────────────────────────────────────────────────────────────
+// Stored in localStorage so it persists across page refreshes
+const STORAGE_KEY = 'suez_users_v1';
 
-function login(){
-
-let u=document.getElementById("username").value
-let p=document.getElementById("password").value
-
-if(u==="admin" && p==="admin123"){
-
-document.getElementById("loginPage").style.display="none"
-document.getElementById("app").style.display="block"
-
-}else{
-
-alert("Invalid Login")
-
+function loadUsers() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch(e) {}
+  // Default users
+  return [
+    { id: 1, username: 'admin', password: 'admin123', fullName: 'Super Admin', role: 'admin', status: 'active', created: '2024-01-01' },
+    { id: 2, username: 'hr1', password: 'hr1234', fullName: 'HR Manager', role: 'user', status: 'active', created: '2024-01-15' }
+  ];
 }
 
+function saveUsers(users) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(users));
 }
 
-function logout(){
-location.reload()
+let users = loadUsers();
+let currentUser = null;
+let editingUserId = null;
+let deletingUserId = null;
+let resettingUserId = null;
+let tableData = [];
+let chartInstance = null;
+
+// ─── AUTH ─────────────────────────────────────────────────────────────────────
+function login() {
+  const u = document.getElementById('username').value.trim();
+  const p = document.getElementById('password').value;
+  const user = users.find(x => x.username === u && x.password === p && x.status === 'active');
+  if (user) {
+    currentUser = user;
+    document.getElementById('loginPage').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    document.getElementById('loginError').style.display = 'none';
+    initApp();
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+  }
 }
 
-function updateProgress(p,t){
-
-document.getElementById("progressBar").style.width=p+"%"
-document.getElementById("status").innerText=t
-
+function logout() {
+  currentUser = null;
+  location.reload();
 }
 
-document.getElementById("submitBtn").addEventListener("click",async()=>{
-
-const jd=document.getElementById("job_description").files[0]
-const resumes=document.getElementById("resume").files
-
-if(!jd || resumes.length===0){
-alert("Upload JD and resumes")
-return
+function initApp() {
+  document.getElementById('welcomeName').innerText = currentUser.fullName || currentUser.username;
+  document.getElementById('headerUserBadge').innerText = currentUser.username;
+  if (currentUser.role === 'admin') {
+    document.getElementById('headerRoleBadge').style.display = 'inline-block';
+    document.getElementById('adminNav').style.display = 'block';
+    document.getElementById('userMgmtNav').style.display = 'flex';
+    document.getElementById('statUsers').innerText = users.length;
+  } else {
+    document.getElementById('statUsers').innerText = '—';
+  }
 }
 
-let seconds=0
-
-const timer=setInterval(()=>{
-
-seconds++
-document.getElementById("timer").innerText=seconds
-
-},1000)
-
-updateProgress(20,"Uploading resumes")
-
-const formData=new FormData()
-
-formData.append("job_description",jd)
-
-for(let i=0;i<resumes.length;i++){
-formData.append("resume",resumes[i])
+// ─── NAVIGATION ───────────────────────────────────────────────────────────────
+function showPage(name) {
+  if (name === 'userManagement' && currentUser.role !== 'admin') {
+    alert('Access denied.');
+    return;
+  }
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  // highlight sidebar
+  document.querySelectorAll('.sidebar a').forEach(a => {
+    if (a.getAttribute('onclick') && a.getAttribute('onclick').includes(name)) a.classList.add('active');
+  });
+  if (name === 'userManagement') renderUserTable();
 }
 
-updateProgress(50,"AI analyzing resumes")
-
-const response=await fetch(
-"https://rajesh96k96.app.n8n.cloud/webhook/9fdb5c11-569d-4f29-acd2-db49248a700c",
-{
-method:"POST",
-body:formData
-})
-
-let data=await response.json()
-
-updateProgress(80,"Generating ranking")
-
-clearInterval(timer)
-
-if(!Array.isArray(data)){
-data=[data]
+// ─── UPLOAD & ANALYSIS ────────────────────────────────────────────────────────
+function updateProgress(p, t) {
+  document.getElementById('progressBar').style.width = p + '%';
+  document.getElementById('status').innerText = t;
 }
 
-data.forEach(c=>{
-c.score=Math.round((c["overall_fit_score"]||c["Similarity"]||0)*100)
-})
+document.getElementById('submitBtn').addEventListener('click', async () => {
+  const jd = document.getElementById('job_description').files[0];
+  const resumes = document.getElementById('resume').files;
+  if (!jd || resumes.length === 0) { alert('Upload JD and resumes'); return; }
 
-data.sort((a,b)=>b.score-a.score)
+  let seconds = 0;
+  const timer = setInterval(() => { seconds++; document.getElementById('timer').innerText = seconds; }, 1000);
 
-tableData=data
+  updateProgress(20, 'Uploading resumes...');
+  const formData = new FormData();
+  formData.append('job_description', jd);
+  for (let i = 0; i < resumes.length; i++) formData.append('resume', resumes[i]);
 
-renderTable(data)
+  updateProgress(50, 'AI analyzing resumes...');
+  const response = await fetch(
+    'https://rajesh96k96.app.n8n.cloud/webhook/9fdb5c11-569d-4f29-acd2-db49248a700c',
+    { method: 'POST', body: formData }
+  );
+  let data = await response.json();
+  updateProgress(80, 'Generating ranking...');
+  clearInterval(timer);
 
-drawChart(data)
+  if (!Array.isArray(data)) data = [data];
+  data.forEach(c => { c.score = Math.round((c['overall_fit_score'] || c['Similarity'] || 0) * 100); });
+  data.sort((a, b) => b.score - a.score);
+  tableData = data;
 
-updateProgress(100,"Completed")
+  document.getElementById('statCandidates').innerText = data.length;
+  document.getElementById('statTopScore').innerText = (data[0] ? data[0].score + '%' : '—');
 
-})
+  showPage('results');
+  renderTable(data);
+  drawChart(data);
+  updateProgress(100, 'Completed ✓');
+});
 
-
-function renderTable(data){
-
-let table=`<table>
-
-<tr>
-<th>Rank</th>
-<th>Name</th>
-<th>Current Company</th>
-<th>Current Designation</th>
-<th>Previous Employer</th>
-<th>Previous Designation</th>
-<th>Total Working Experience</th>
-<th>Relevance Experience</th>
-<th>Overall Fit Score</th>
-<th>Final Notes</th>
-</tr>
-`
-
-data.forEach((c,i)=>{
-
-table+=`<tr class="${i==0?'topCandidate':''}">
-
-<td>${i+1}</td>
-<td>${c["Name"]||""}</td>
-<td>${c["Current Company"]||""}</td>
-<td>${c["Current Designation"]||""}</td>
-<td>${c["Previous Employer"]||""}</td>
-<td>${c["Previous Designation"]||""}</td>
-<td>${c["Total Working Experience"]||""}</td>
-<td>${c["Relevance Experience"]||""}</td>
-<td>${c.score}%</td>
-<td>${c["final_notes"]||""}</td>
-
-</tr>`
-
-})
-
-table+="</table>"
-
-document.getElementById("result").innerHTML=table
-
+function renderTable(data) {
+  let html = `<table><tr>
+    <th>Rank</th><th>Name</th><th>Current Company</th><th>Current Designation</th>
+    <th>Previous Employer</th><th>Previous Designation</th><th>Total Experience</th>
+    <th>Relevance Exp</th><th>Fit Score</th><th>Final Notes</th>
+  </tr>`;
+  data.forEach((c, i) => {
+    html += `<tr class="${i===0?'topCandidate':''}">
+      <td>${i+1}</td>
+      <td><strong>${c['Name']||''}</strong></td>
+      <td>${c['Current Company']||''}</td>
+      <td>${c['Current Designation']||''}</td>
+      <td>${c['Previous Employer']||''}</td>
+      <td>${c['Previous Designation']||''}</td>
+      <td>${c['Total Working Experience']||''}</td>
+      <td>${c['Relevance Experience']||''}</td>
+      <td><strong>${c.score}%</strong></td>
+      <td style="max-width:200px;font-size:12px;">${c['final_notes']||''}</td>
+    </tr>`;
+  });
+  html += '</table>';
+  document.getElementById('result').innerHTML = html;
 }
 
-
-function drawChart(data){
-
-let names=data.map(x=>x["Name"])
-let scores=data.map(x=>x.score)
-
-new Chart(document.getElementById("chart"),{
-
-type:"bar",
-
-data:{
-labels:names,
-datasets:[{
-label:"Matching Score (%)",
-data:scores,
-backgroundColor:"#2c7be5"
-}]
-},
-
-options:{
-responsive:true,
-maintainAspectRatio:false,
-scales:{
-y:{
-beginAtZero:true,
-max:100,
-ticks:{
-callback:(v)=>v+"%"
-}
-}
-}
+function drawChart(data) {
+  if (chartInstance) { chartInstance.destroy(); }
+  chartInstance = new Chart(document.getElementById('chart'), {
+    type: 'bar',
+    data: {
+      labels: data.map(x => x['Name']),
+      datasets: [{ label: 'Matching Score (%)', data: data.map(x => x.score), backgroundColor: '#2c7be5', borderRadius: 5 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      scales: { y: { beginAtZero: true, max: 100, ticks: { callback: v => v + '%' } } }
+    }
+  });
 }
 
-})
-
+function downloadExcel() {
+  if (!tableData.length) { alert('No data to download. Run analysis first.'); return; }
+  const excelData = tableData.map(c => ({
+    'Name': c['Name'], 'Gender': c['Gender'], 'Education': c['Education'],
+    'Current Company': c['Current Company'], 'Current Designation': c['Current Designation'],
+    'Current Employment Tenure': c['Current Employement Tenure'],
+    'Previous Employer': c['Previous Employer'], 'Previous Designation': c['Previous Designation'],
+    'Employment Tenure': c['Employement Tenure'], 'Total Working Experience': c['Total Working Experience'],
+    'Relevance Experience': c['Relevance Experience'], 'Graduation': c['Graduation'],
+    'Specialisation': c['Specialisation'], 'Post Graduate': c['Post Graduate'],
+    'Specialisation PG': c['Specialisation PG'], 'Key Skills': c['Key Skills'],
+    'Overall Fit Score': c['overall_fit_score'], 'Similarity': c['Similarity'],
+    'Strengths': c['strengths'], 'Concerns/Gaps': c['concerns_or_gaps'], 'Final Notes': c['final_notes']
+  }));
+  const ws = XLSX.utils.json_to_sheet(excelData);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Candidates');
+  XLSX.writeFile(wb, 'Candidate_AI_Screening.xlsx');
 }
 
-
-function downloadExcel(){
-
-let excelData = tableData.map(c=>({
-
-"Name":c["Name"],
-"Gender":c["Gender"],
-"Education":c["Education"],
-"Current Company":c["Current Company"],
-"Current Designation":c["Current Designation"],
-"Current Employement Tenure":c["Current Employement Tenure"],
-"Previous Employer":c["Previous Employer"],
-"Previous Designation":c["Previous Designation"],
-"Employement Tenure":c["Employement Tenure"],
-"Total Working Experience":c["Total Working Experience"],
-"Relevance Experience":c["Relevance Experience"],
-"Graduation":c["Graduation"],
-"Specialisation":c["Specialisation"],
-"Post Graduate":c["Post Graduate"],
-"Specialisation PG":c["Specialisation PG"],
-"Key Skills":c["Key Skills"],
-"overall_fit_score":c["overall_fit_score"],
-"Similarity":c["Similarity"],
-"strengths":c["strengths"],
-"concerns_or_gaps":c["concerns_or_gaps"],
-"final_notes":c["final_notes"]
-
-}))
-
-const worksheet=XLSX.utils.json_to_sheet(excelData)
-
-const workbook=XLSX.utils.book_new()
-
-XLSX.utils.book_append_sheet(workbook,worksheet,"Candidates")
-
-XLSX.writeFile(workbook,"Candidate_AI_Screening.xlsx")
-
+// ─── USER MANAGEMENT ─────────────────────────────────────────────────────────
+function renderUserTable() {
+  users = loadUsers();
+  const tbody = document.getElementById('userTableBody');
+  if (!users.length) { tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#888;">No users found.</td></tr>'; return; }
+  tbody.innerHTML = users.map((u, i) => `
+    <tr>
+      <td>${i + 1}</td>
+      <td><strong>${u.username}</strong></td>
+      <td>${u.fullName || '—'}</td>
+      <td><span class="badge ${u.role === 'admin' ? 'badge-admin' : 'badge-user'}">${u.role}</span></td>
+      <td><span class="badge ${u.status === 'active' ? 'badge-active' : 'badge-inactive'}">${u.status}</span></td>
+      <td>${u.created || '—'}</td>
+      <td style="white-space:nowrap;">
+        <button class="btn btn-outline btn-sm" onclick="openEditUser(${u.id})" ${u.id === 1 && currentUser.id !== 1 ? 'disabled' : ''}>Edit</button>
+        <button class="btn btn-warning btn-sm" style="margin:0 4px;" onclick="openResetPassword(${u.id})">Reset Pwd</button>
+        <button class="btn btn-danger btn-sm" onclick="openDeleteUser(${u.id})" ${u.id === currentUser.id ? 'disabled title="Cannot delete yourself"' : ''}>Delete</button>
+      </td>
+    </tr>
+  `).join('');
 }
+
+function openAddUser() {
+  editingUserId = null;
+  document.getElementById('modalTitle').innerText = 'Add New User';
+  document.getElementById('modalUsername').value = '';
+  document.getElementById('modalFullName').value = '';
+  document.getElementById('modalPassword').value = '';
+  document.getElementById('modalRole').value = 'user';
+  document.getElementById('modalStatus').value = 'active';
+  document.getElementById('modalUsername').disabled = false;
+  document.getElementById('modalPassword').placeholder = 'Set password';
+  document.getElementById('modalAlert').innerHTML = '';
+  document.getElementById('userModal').classList.add('open');
+}
+
+function openEditUser(id) {
+  const u = users.find(x => x.id === id);
+  if (!u) return;
+  editingUserId = id;
+  document.getElementById('modalTitle').innerText = 'Edit User';
+  document.getElementById('modalUsername').value = u.username;
+  document.getElementById('modalFullName').value = u.fullName || '';
+  document.getElementById('modalPassword').value = '';
+  document.getElementById('modalRole').value = u.role;
+  document.getElementById('modalStatus').value = u.status;
+  document.getElementById('modalUsername').disabled = true;
+  document.getElementById('modalPassword').placeholder = 'Leave blank to keep current';
+  document.getElementById('modalAlert').innerHTML = '';
+  document.getElementById('userModal').classList.add('open');
+}
+
+function saveUser() {
+  const username = document.getElementById('modalUsername').value.trim();
+  const fullName = document.getElementById('modalFullName').value.trim();
+  const password = document.getElementById('modalPassword').value;
+  const role = document.getElementById('modalRole').value;
+  const status = document.getElementById('modalStatus').value;
+
+  if (!username || !fullName) {
+    showModalAlert('Username and Full Name are required.', 'error'); return;
+  }
+  if (!editingUserId && !password) {
+    showModalAlert('Password is required for new users.', 'error'); return;
+  }
+
+  users = loadUsers();
+
+  if (editingUserId) {
+    const idx = users.findIndex(x => x.id === editingUserId);
+    if (idx === -1) return;
+    users[idx].fullName = fullName;
+    users[idx].role = role;
+    users[idx].status = status;
+    if (password) users[idx].password = password;
+    saveUsers(users);
+    closeModal();
+    renderUserTable();
+    showUserAlert('User updated successfully.', 'success');
+  } else {
+    if (users.find(x => x.username === username)) {
+      showModalAlert('Username already exists.', 'error'); return;
+    }
+    const newUser = {
+      id: Date.now(),
+      username, fullName, password, role, status,
+      created: new Date().toISOString().split('T')[0]
+    };
+    users.push(newUser);
+    saveUsers(users);
+    closeModal();
+    renderUserTable();
+    showUserAlert('User created successfully.', 'success');
+    document.getElementById('statUsers').innerText = users.length;
+  }
+}
+
+function openDeleteUser(id) {
+  const u = users.find(x => x.id === id);
+  if (!u) return;
+  deletingUserId = id;
+  document.getElementById('deleteUserName').innerText = u.username;
+  document.getElementById('deleteModal').classList.add('open');
+}
+
+function confirmDelete() {
+  users = loadUsers();
+  users = users.filter(x => x.id !== deletingUserId);
+  saveUsers(users);
+  closeDeleteModal();
+  renderUserTable();
+  showUserAlert('User deleted.', 'success');
+  document.getElementById('statUsers').innerText = users.length;
+}
+
+function openResetPassword(id) {
+  const u = users.find(x => x.id === id);
+  if (!u) return;
+  resettingUserId = id;
+  document.getElementById('resetUserName').innerText = u.username;
+  document.getElementById('resetPassword').value = '';
+  document.getElementById('resetModal').classList.add('open');
+}
+
+function confirmReset() {
+  const pwd = document.getElementById('resetPassword').value;
+  if (!pwd) { alert('Enter a new password.'); return; }
+  users = loadUsers();
+  const idx = users.findIndex(x => x.id === resettingUserId);
+  if (idx !== -1) { users[idx].password = pwd; saveUsers(users); }
+  closeResetModal();
+  showUserAlert('Password reset successfully.', 'success');
+}
+
+function closeModal() { document.getElementById('userModal').classList.remove('open'); }
+function closeDeleteModal() { document.getElementById('deleteModal').classList.remove('open'); }
+function closeResetModal() { document.getElementById('resetModal').classList.remove('open'); }
+
+function showModalAlert(msg, type) {
+  document.getElementById('modalAlert').innerHTML = `<div class="alert alert-${type==='error'?'error':'success'}">${msg}</div>`;
+}
+function showUserAlert(msg, type) {
+  document.getElementById('userAlert').innerHTML = `<div class="alert alert-${type==='error'?'error':'success'}">${msg}</div>`;
+  setTimeout(() => { document.getElementById('userAlert').innerHTML = ''; }, 3000);
+}
+
+// Close modals on overlay click
+document.querySelectorAll('.modal-overlay').forEach(el => {
+  el.addEventListener('click', function(e) { if (e.target === this) this.classList.remove('open'); });
+});
 
 </script>
-
 </body>
-
 </html>
-
