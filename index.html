@@ -486,15 +486,15 @@ function drawChart(data) {
 function downloadExcel() {
   if (!tableData.length) { alert('No data to download. Run analysis first.'); return; }
   const excelData = tableData.map(c => ({
-    'Name': c['Name'], 'Gender': c['Gender'], 'Education': c['Education'],
+    'Name': c['Name'],'Education': c['Education'],
     'Current Company': c['Current Company'], 'Current Designation': c['Current Designation'],
     'Current Employment Tenure': c['Current Employement Tenure'],
     'Previous Employer': c['Previous Employer'], 'Previous Designation': c['Previous Designation'],
     'Employment Tenure': c['Employement Tenure'], 'Total Working Experience': c['Total Working Experience'],
     'Relevance Experience': c['Relevance Experience'], 'Graduation': c['Graduation'],
     'Specialisation': c['Specialisation'], 'Post Graduate': c['Post Graduate'],
-    'Specialisation PG': c['Specialisation PG'], 'Key Skills': c['Key Skills'],
-    'Overall Fit Score': c['overall_fit_score'], 'Similarity': c['Similarity'],
+     'Key Skills': c['Key Skills'],
+    'Overall Fit Score': c['overall_fit_score'], 
     'Strengths': c['strengths'], 'Concerns/Gaps': c['concerns_or_gaps'], 'Final Notes': c['final_notes']
   }));
   const ws = XLSX.utils.json_to_sheet(excelData);
@@ -657,3 +657,4 @@ document.querySelectorAll('.modal-overlay').forEach(el => {
 </script>
 </body>
 </html>
+
