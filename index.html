@@ -16,6 +16,8 @@ margin:0;
 background:#f4f6f9;
 }
 
+/* HEADER */
+
 .header{
 background:white;
 padding:15px 30px;
@@ -30,6 +32,8 @@ font-size:22px;
 font-weight:bold;
 color:#2c7be5;
 }
+
+/* SIDEBAR */
 
 .sidebar{
 position:fixed;
@@ -50,10 +54,14 @@ padding:10px 0;
 cursor:pointer;
 }
 
+/* MAIN */
+
 .main{
 margin-left:240px;
 padding:30px;
 }
+
+/* CARDS */
 
 .card{
 background:white;
@@ -84,6 +92,8 @@ border:1px solid #ccc;
 border-radius:6px;
 }
 
+/* TABLE */
+
 table{
 border-collapse:collapse;
 width:100%;
@@ -104,6 +114,8 @@ background:#f2f2f2;
 background:#e6ffe6;
 }
 
+/* LOGIN */
+
 .login{
 max-width:400px;
 margin:auto;
@@ -113,6 +125,8 @@ padding:30px;
 border-radius:8px;
 box-shadow:0 3px 10px rgba(0,0,0,0.1);
 }
+
+/* PROGRESS */
 
 .progressBar{
 width:100%;
@@ -132,6 +146,8 @@ border-radius:5px;
 </head>
 
 <body>
+
+<!-- LOGIN PAGE -->
 
 <div id="loginPage" class="login">
 
@@ -270,8 +286,10 @@ return
 let seconds=0
 
 const timer=setInterval(()=>{
+
 seconds++
 document.getElementById("timer").innerText=seconds
+
 },1000)
 
 updateProgress(20,"Uploading resumes")
@@ -287,14 +305,15 @@ formData.append("resume",resumes[i])
 updateProgress(50,"AI analyzing resumes")
 
 const response=await fetch(
-"https://rajesh96k.app.n8n.cloud/webhook/9fdb5c11-569d-4f29-acd2-db49248a700c",
-  
+"https://suezppl.app.n8n.cloud/webhook/9fdb5c11-569d-4f29-acd2-db49248a700c",
 {
 method:"POST",
 body:formData
 })
 
 let data=await response.json()
+
+updateProgress(80,"Generating ranking")
 
 clearInterval(timer)
 
@@ -303,12 +322,7 @@ data=[data]
 }
 
 data.forEach(c=>{
-
-let fit=c["overall_fit_score"]
-
-if(fit>1) c.score=fit
-else c.score=Math.round((fit||c["Similarity"]||0)*100)
-
+c.score=Math.round((c["overall_fit_score"]||c["Similarity"]||0)*100)
 })
 
 data.sort((a,b)=>b.score-a.score)
@@ -407,31 +421,39 @@ callback:(v)=>v+"%"
 
 function downloadExcel(){
 
-const headers=[
-"Name","Gender","Education","Current Company","Current Designation",
-"Current Employement Tenure","Previous Employer","Previous Designation",
-"Employement Tenure","Total Working Experience","Relevance Experience",
-"Graduation","Specialisation","Post Graduate","Specialisation PG",
-"Key Skills","overall_fit_score","Similarity","strengths",
-"concerns_or_gaps","final_notes"
-]
+let excelData = tableData.map(c=>({
 
-let rows=tableData.map(c=>[
-c["Name"],c["Gender"],c["Education"],c["Current Company"],c["Current Designation"],
-c["Current Employement Tenure"],c["Previous Employer"],c["Previous Designation"],
-c["Employement Tenure"],c["Total Working Experience"],c["Relevance Experience"],
-c["Graduation"],c["Specialisation"],c["Post Graduate"],c["Specialisation PG"],
-c["Key Skills"],c["overall_fit_score"],c["Similarity"],c["strengths"],
-c["concerns_or_gaps"],c["final_notes"]
-])
+"Name":c["Name"],
+"Gender":c["Gender"],
+"Education":c["Education"],
+"Current Company":c["Current Company"],
+"Current Designation":c["Current Designation"],
+"Current Employement Tenure":c["Current Employement Tenure"],
+"Previous Employer":c["Previous Employer"],
+"Previous Designation":c["Previous Designation"],
+"Employement Tenure":c["Employement Tenure"],
+"Total Working Experience":c["Total Working Experience"],
+"Relevance Experience":c["Relevance Experience"],
+"Graduation":c["Graduation"],
+"Specialisation":c["Specialisation"],
+"Post Graduate":c["Post Graduate"],
+"Specialisation PG":c["Specialisation PG"],
+"Key Skills":c["Key Skills"],
+"overall_fit_score":c["overall_fit_score"],
+"Similarity":c["Similarity"],
+"strengths":c["strengths"],
+"concerns_or_gaps":c["concerns_or_gaps"],
+"final_notes":c["final_notes"]
 
-let ws=XLSX.utils.aoa_to_sheet([headers,...rows])
+}))
 
-let wb=XLSX.utils.book_new()
+const worksheet=XLSX.utils.json_to_sheet(excelData)
 
-XLSX.utils.book_append_sheet(wb,ws,"Candidates")
+const workbook=XLSX.utils.book_new()
 
-XLSX.writeFile(wb,"Candidate_AI_Screening.xlsx")
+XLSX.utils.book_append_sheet(workbook,worksheet,"Candidates")
+
+XLSX.writeFile(workbook,"Candidate_AI_Screening.xlsx")
 
 }
 
@@ -440,5 +462,3 @@ XLSX.writeFile(wb,"Candidate_AI_Screening.xlsx")
 </body>
 
 </html>
-
-
