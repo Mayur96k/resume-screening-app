@@ -484,22 +484,45 @@ function drawChart(data) {
 }
 
 function downloadExcel() {
-  if (!tableData.length) { alert('No data to download. Run analysis first.'); return; }
+
+  if (!tableData || !tableData.length) {
+    alert('No data to download. Run analysis first.');
+    return;
+  }
+
   const excelData = tableData.map(c => ({
-    'Name': c['Name'],'Education': c['Education'],
-    'Current Company': c['Current Company'], 'Current Designation': c['Current Designation'],
-    'Current Employment Tenure': c['Current Employement Tenure'],
-    'Previous Employer': c['Previous Employer'], 'Previous Designation': c['Previous Designation'],
-    'Employment Tenure': c['Employement Tenure'], 'Total Working Experience': c['Total Working Experience'],
-    'Relevance Experience': c['Relevance Experience'], 'Graduation': c['Graduation'],
-     'Post Graduate': c['Post Graduate'],
-     'Key Skills': c['Key Skills'],
-    'Overall Fit Score': c['overall_fit_score'], 
-    'Strengths': c['strengths'], 'Concerns/Gaps': c['concerns_or_gaps'], 'Final Notes': c['final_notes']
+    'Name': c['Name'] || '',
+    'Education': c['Education'] || '',
+
+    'Current Company': c['Current Company'] || '',
+    'Current Designation': c['Current Designation'] || '',
+    'Current Employment Tenure': c['Current Employment Tenure'] || '',
+
+    'Previous Employer': c['Previous Employer'] || '',
+    'Previous Designation': c['Previous Designation'] || '',
+
+    'Employment Tenure': c['Employment Tenure'] || '',
+
+    'Total Working Experience': c['Total Working Experience'] || '',
+    'Relevance Experience': c['Relevance Experience'] || '',
+
+    'Graduation': c['Graduation'] || '',
+    'Post Graduate': c['Post Graduate'] || '',
+
+    'Key Skills': c['Key Skills'] || '',
+
+    'Overall Fit Score': c['Overall Fit Score'] || '',
+
+    'Strengths': c['Strengths'] || '',
+    'Concerns/Gaps': c['Concerns/Gaps'] || '',
+    'Final Notes': c['Final Notes'] || ''
   }));
+
   const ws = XLSX.utils.json_to_sheet(excelData);
+
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, 'Candidates');
+
   XLSX.writeFile(wb, 'Candidate_AI_Screening.xlsx');
 }
 
@@ -657,5 +680,6 @@ document.querySelectorAll('.modal-overlay').forEach(el => {
 </script>
 </body>
 </html>
+
 
 
