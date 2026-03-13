@@ -389,11 +389,19 @@ ALTER TABLE hr_results DISABLE ROW LEVEL SECURITY;</div>
 
 <script>
 // ════════════════════════════════════════════════════════════════════
-//  SUPABASE CONFIG — stored in localStorage so it persists on this browser
+//  SUPABASE CONFIG — hardcoded so it works on ALL devices/incognito
 // ════════════════════════════════════════════════════════════════════
+const HARDCODED_SB_URL = 'https://tytyyxdqtxnscevwetvy.supabase.co';  // ← your URL
+const HARDCODED_SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR5dHl5eGRxdHhuc2NldndldHZ5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzODUxODAsImV4cCI6MjA4ODk2MTE4MH0.YUZEtVhQa3I8cHbT2E1U7ra7TM_fDwjb5yHKkjGDPrE';                          // ← your anon key
+
 const SB_CONFIG_KEY = 'suez_sb_config';
 
 function getSbConfig() {
+  // Priority 1: hardcoded values (works on all devices, incognito, everywhere)
+  if (HARDCODED_SB_URL && HARDCODED_SB_KEY) {
+    return { url: HARDCODED_SB_URL.replace(/\/$/, ''), key: HARDCODED_SB_KEY };
+  }
+  // Priority 2: manually saved via DB Settings modal (localStorage fallback)
   try { return JSON.parse(localStorage.getItem(SB_CONFIG_KEY)) || null; } catch(e) { return null; }
 }
 function setSbConfig(url, key) {
