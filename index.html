@@ -8,7 +8,6 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Inter',Arial,sans-serif;background:#f0f4f8;color:#1a2332;}
-
 .login-wrap{display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,#1a2f5a 0%,#2c7be5 100%);}
 .login-box{background:white;padding:40px;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.3);width:400px;}
 .login-logo{font-size:24px;font-weight:700;color:#2c7be5;margin-bottom:8px;}
@@ -18,31 +17,24 @@ body{font-family:'Inter',Arial,sans-serif;background:#f0f4f8;color:#1a2332;}
 .login-box button{width:100%;padding:12px;background:#2c7be5;color:white;border:none;border-radius:7px;font-size:15px;font-weight:600;cursor:pointer;}
 .login-box button:hover{background:#1a5fd1;}
 .login-error{color:#e53e3e;font-size:13px;margin-top:10px;display:none;}
-
-/* DB CONFIG BANNER */
 .db-banner{background:#fff8e1;border:1px solid #ffc107;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:13px;color:#856404;display:none;}
 .db-banner a{color:#2c7be5;cursor:pointer;text-decoration:underline;}
-
 #app{display:none;}
 .header{background:white;padding:14px 28px;border-bottom:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
 .logo{font-size:20px;font-weight:700;color:#2c7be5;}
 .header-right{display:flex;align-items:center;gap:16px;font-size:13px;color:#555;}
 .user-badge{background:#eef4ff;color:#2c7be5;border-radius:20px;padding:5px 14px;font-weight:600;font-size:13px;}
 .admin-badge{background:#fff3e0;color:#e65c00;border-radius:20px;padding:5px 14px;font-weight:600;font-size:12px;}
-
 .sidebar{position:fixed;left:0;top:60px;width:220px;height:calc(100% - 60px);background:#1a2332;padding:20px 0;overflow-y:auto;}
 .sidebar-section{font-size:10px;font-weight:700;color:#4a5568;text-transform:uppercase;letter-spacing:1px;padding:10px 22px 6px;}
 .sidebar a{display:flex;align-items:center;gap:10px;color:#a0aec0;text-decoration:none;padding:10px 22px;cursor:pointer;font-size:14px;transition:all .15s;}
 .sidebar a:hover,.sidebar a.active{background:#2d3748;color:white;}
 .sidebar a .icon{font-size:16px;}
-
 .main{margin-left:220px;padding:28px;min-height:calc(100vh - 60px);}
 .page{display:none;}
 .page.active{display:block;}
-
 .card{background:white;padding:24px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.07);margin-bottom:22px;}
 .card h3{font-size:16px;font-weight:600;color:#1a2332;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid #f0f4f8;}
-
 .btn{padding:10px 18px;border:none;border-radius:7px;cursor:pointer;font-size:13px;font-weight:600;transition:all .15s;}
 .btn-primary{background:#2c7be5;color:white;}
 .btn-primary:hover{background:#1a5fd1;}
@@ -57,53 +49,41 @@ body{font-family:'Inter',Arial,sans-serif;background:#f0f4f8;color:#1a2332;}
 .btn-sm{padding:6px 12px;font-size:12px;}
 .btn-outline{background:transparent;border:1px solid #2c7be5;color:#2c7be5;}
 .btn-outline:hover{background:#eef4ff;}
-
-/* CANCEL BUTTON */
 .btn-cancel{background:#dc3545;color:white;display:none;animation:pulse 1.5s infinite;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.7;}}
-
 .form-group{margin-bottom:15px;}
 .form-group label{display:block;font-size:13px;font-weight:500;color:#444;margin-bottom:5px;}
 .form-group input,.form-group select{width:100%;padding:10px 13px;border:1px solid #ddd;border-radius:7px;font-size:14px;outline:none;transition:border .2s;}
 .form-group input:focus,.form-group select:focus{border-color:#2c7be5;}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-
 table{border-collapse:collapse;width:100%;font-size:13px;}
 th,td{border:1px solid #e8edf2;padding:9px 11px;text-align:left;vertical-align:middle;}
 th{background:#f7fafc;font-weight:600;color:#444;font-size:12px;}
-
 .badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;}
 .badge-active{background:#c6f6d5;color:#276749;}
 .badge-inactive{background:#fed7d7;color:#9b2c2c;}
 .badge-admin{background:#bee3f8;color:#2a69ac;}
 .badge-user{background:#e9d8fd;color:#553c9a;}
-
 .progressBar{width:100%;background:#e2e8f0;border-radius:5px;margin-top:8px;}
 .progress{height:8px;width:0%;background:linear-gradient(90deg,#2c7be5,#56cfff);border-radius:5px;transition:width .4s;}
-
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:1000;align-items:center;justify-content:center;}
 .modal-overlay.open{display:flex;}
 .modal{background:white;border-radius:12px;padding:30px;width:460px;max-width:95vw;box-shadow:0 20px 60px rgba(0,0,0,0.25);}
 .modal h3{font-size:17px;font-weight:700;margin-bottom:20px;}
 .modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;}
-
-/* DB CONFIG MODAL */
 .db-modal{width:560px;}
 .db-step{background:#f7fafc;border-radius:8px;padding:14px 16px;margin-bottom:12px;border-left:3px solid #2c7be5;}
 .db-step-num{font-size:11px;font-weight:700;color:#2c7be5;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;}
 .db-step code{background:#1a2332;color:#56cfff;padding:2px 8px;border-radius:4px;font-size:12px;display:inline-block;margin:3px 0;}
-
 .alert{padding:12px 16px;border-radius:7px;font-size:13px;margin-bottom:16px;}
 .alert-success{background:#c6f6d5;color:#276749;}
 .alert-error{background:#fed7d7;color:#9b2c2c;}
 .alert-info{background:#bee3f8;color:#2a69ac;}
 .alert-warning{background:#fff3cd;color:#856404;}
-
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:24px;}
 .stat-card{background:white;padding:20px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.07);}
 .stat-num{font-size:28px;font-weight:700;color:#2c7be5;}
 .stat-label{font-size:12px;color:#777;margin-top:4px;}
-
 .score-wrap{display:flex;align-items:center;gap:8px;}
 .score-bar-bg{background:#e9ecef;border-radius:20px;width:70px;height:9px;overflow:hidden;flex-shrink:0;}
 .score-bar-fill{height:100%;border-radius:20px;}
@@ -113,19 +93,14 @@ th{background:#f7fafc;font-weight:600;color:#444;font-size:12px;}
 .ats-legend-item{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;}
 .ats-dot{width:11px;height:11px;border-radius:50%;}
 .rank-medal{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-weight:700;font-size:12px;}
-
-/* DB status indicator */
 .db-status{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;}
 .db-dot{width:8px;height:8px;border-radius:50%;background:#ccc;}
 .db-dot.connected{background:#28a745;}
 .db-dot.disconnected{background:#dc3545;}
-
 @media(max-width:900px){.stats-grid{grid-template-columns:repeat(2,1fr);}}
 </style>
 </head>
 <body>
-
-<!-- LOGIN -->
 <div id="loginPage" class="login-wrap">
   <div class="login-box">
     <div class="login-logo">SUEZ HR Portal</div>
@@ -140,8 +115,6 @@ th{background:#f7fafc;font-weight:600;color:#444;font-size:12px;}
     <div class="login-error" id="loginError">Invalid username or password.</div>
   </div>
 </div>
-
-<!-- APP -->
 <div id="app">
   <div class="header">
     <div class="logo">⚡ SUEZ AI Talent Platform</div>
@@ -155,7 +128,6 @@ th{background:#f7fafc;font-weight:600;color:#444;font-size:12px;}
       <span style="cursor:pointer;color:#e53e3e;font-weight:600;" onclick="logout()">Logout</span>
     </div>
   </div>
-
   <div class="sidebar">
     <div class="sidebar-section">Main</div>
     <a class="active" onclick="showPage('dashboard')"><span class="icon">📊</span> Dashboard</a>
@@ -164,13 +136,11 @@ th{background:#f7fafc;font-weight:600;color:#444;font-size:12px;}
     <a onclick="showPage('analytics')"><span class="icon">📈</span> Analytics</a>
     <div class="sidebar-section" id="adminNav" style="display:none">Admin</div>
     <a id="userMgmtNav" style="display:none" onclick="showPage('userManagement')"><span class="icon">👥</span> User Management</a>
+    <a id="jdMgmtNav" style="display:none" onclick="showPage('jdManagement')"><span class="icon">📁</span> JD Library</a>
     <a id="dbConfigNav" style="display:none" onclick="openDbConfig()"><span class="icon">🗄️</span> DB Settings</a>
     <a onclick="logout()"><span class="icon">🚪</span> Logout</a>
   </div>
-
   <div class="main">
-
-    <!-- DASHBOARD -->
     <div class="page active" id="page-dashboard">
       <h2 style="margin-bottom:20px;font-size:22px;">Welcome back, <span id="welcomeName"></span> 👋</h2>
       <div class="stats-grid">
@@ -192,14 +162,28 @@ th{background:#f7fafc;font-weight:600;color:#444;font-size:12px;}
         </div>
       </div>
     </div>
-
-    <!-- UPLOAD -->
     <div class="page" id="page-upload">
       <div class="card">
         <h3>📤 Upload Job Description &amp; Resumes</h3>
         <div class="form-group">
-          <label>Job Description (PDF/DOC)</label>
-          <input type="file" id="job_description">
+          <label>Job Description</label>
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:8px;">
+            <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;font-weight:500;">
+              <input type="radio" name="jdSource" value="library" id="jdFromLibrary" onchange="toggleJdSource()"> Select from JD Library
+            </label>
+            <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;font-weight:500;">
+              <input type="radio" name="jdSource" value="upload" id="jdFromUpload" onchange="toggleJdSource()" checked> Upload new JD
+            </label>
+          </div>
+          <div id="jdLibrarySelect" style="display:none;">
+            <select id="jdDropdown" style="width:100%;padding:10px 14px;border:1px solid #ddd;border-radius:7px;font-size:14px;background:white;">
+              <option value="">-- Select a Job Description --</option>
+            </select>
+            <div id="jdSelectedInfo" style="margin-top:6px;font-size:12px;color:#2c7be5;"></div>
+          </div>
+          <div id="jdUploadInput">
+            <input type="file" id="job_description">
+          </div>
         </div>
         <div class="form-group">
           <label>Resumes (Multiple files allowed)</label>
@@ -207,7 +191,6 @@ th{background:#f7fafc;font-weight:600;color:#444;font-size:12px;}
         </div>
         <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
           <button class="btn btn-primary" id="submitBtn">🔍 Analyze Candidates</button>
-          <!-- CANCEL BUTTON — shown during processing -->
           <button class="btn btn-cancel" id="cancelBtn" onclick="cancelAnalysis()">⛔ Stop / Cancel</button>
           <button class="btn btn-outline" onclick="downloadExcel()">⬇ Download Excel</button>
         </div>
@@ -218,8 +201,6 @@ th{background:#f7fafc;font-weight:600;color:#444;font-size:12px;}
         </div>
       </div>
     </div>
-
-    <!-- RESULTS -->
     <div class="page" id="page-results">
       <div class="card">
         <h3>🏆 Candidate Matching Score (%)</h3>
@@ -241,13 +222,25 @@ th{background:#f7fafc;font-weight:600;color:#444;font-size:12px;}
         <div id="result"><p style="color:#888;font-size:13px;">No results yet. Upload and analyze candidates first.</p></div>
       </div>
     </div>
-
-    <!-- ANALYTICS -->
+    <div class="page" id="page-jdManagement">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+          <h3 style="margin:0;border:none;padding:0;">📁 JD Library</h3>
+          <button class="btn btn-success btn-sm" onclick="openAddJd()">+ Upload New JD</button>
+        </div>
+        <div id="jdAlert"></div>
+        <p style="font-size:13px;color:#888;margin-bottom:16px;">Upload Job Descriptions here. HR users can select them from a dropdown when analyzing candidates.</p>
+        <div id="jdTableWrap">
+          <table>
+            <tr><th>#</th><th>Job Title</th><th>File Name</th><th>Uploaded By</th><th>Date</th><th>Actions</th></tr>
+            <tbody id="jdTableBody"><tr><td colspan="6" style="text-align:center;color:#888;">No JDs uploaded yet.</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
     <div class="page" id="page-analytics">
       <div class="card"><h3>📈 Analytics</h3><p style="color:#888;font-size:14px;">Analytics will appear here after running candidate analysis.</p></div>
     </div>
-
-    <!-- USER MANAGEMENT -->
     <div class="page" id="page-userManagement">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
@@ -261,26 +254,19 @@ th{background:#f7fafc;font-weight:600;color:#444;font-size:12px;}
         </table>
       </div>
     </div>
-
   </div>
 </div>
-
-<!-- DB CONFIG MODAL -->
 <div class="modal-overlay" id="dbModal">
   <div class="modal db-modal">
     <h3>🗄️ Supabase Database Configuration</h3>
     <div id="dbModalAlert"></div>
-
     <div class="db-step">
       <div class="db-step-num">Step 1 — Create Free Supabase Account</div>
-      Go to <strong>supabase.com</strong> → New Project → Choose a name & password → Wait ~2 min for setup
+      Go to <strong>supabase.com</strong> → New Project → Choose a name &amp; password → Wait ~2 min for setup
     </div>
-
     <div class="db-step">
       <div class="db-step-num">Step 2 — Run this SQL in Supabase SQL Editor</div>
-      Go to <strong>SQL Editor</strong> in your Supabase dashboard and run:
-      <div style="background:#1a2332;color:#a8ff78;padding:12px;border-radius:6px;font-size:11px;margin-top:8px;white-space:pre;overflow-x:auto;line-height:1.6;">-- Users table
-CREATE TABLE hr_users (
+      <div style="background:#1a2332;color:#a8ff78;padding:12px;border-radius:6px;font-size:11px;margin-top:8px;white-space:pre;overflow-x:auto;line-height:1.6;">CREATE TABLE hr_users (
   id BIGSERIAL PRIMARY KEY,
   username TEXT UNIQUE NOT NULL,
   password TEXT NOT NULL,
@@ -289,12 +275,8 @@ CREATE TABLE hr_users (
   status TEXT DEFAULT 'active',
   created_at DATE DEFAULT CURRENT_DATE
 );
-
--- Insert default admin
 INSERT INTO hr_users (username,password,full_name,role,status)
 VALUES ('admin','admin123','Super Admin','admin','active');
-
--- Results table
 CREATE TABLE hr_results (
   id BIGSERIAL PRIMARY KEY,
   session_id TEXT,
@@ -306,22 +288,25 @@ CREATE TABLE hr_results (
   created_by TEXT,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
-
--- Allow public read/write (Row Level Security off for simplicity)
 ALTER TABLE hr_users DISABLE ROW LEVEL SECURITY;
-ALTER TABLE hr_results DISABLE ROW LEVEL SECURITY;</div>
+ALTER TABLE hr_results DISABLE ROW LEVEL SECURITY;
+
+CREATE TABLE hr_jd_library (
+  id TEXT PRIMARY KEY,
+  title TEXT NOT NULL,
+  file_name TEXT,
+  file_data TEXT,
+  file_type TEXT,
+  uploaded_by TEXT,
+  created_at DATE DEFAULT CURRENT_DATE
+);
+ALTER TABLE hr_jd_library DISABLE ROW LEVEL SECURITY;</div>
       <button class="btn btn-sm btn-secondary" style="margin-top:8px;" onclick="copySQL()">📋 Copy SQL</button>
     </div>
-
     <div class="db-step">
       <div class="db-step-num">Step 3 — Get Your Credentials</div>
-      Go to <strong>Project Settings → API</strong> and copy:
-      <ul style="margin:8px 0 0 16px;font-size:13px;line-height:2;">
-        <li><strong>Project URL</strong> (looks like https://xxxx.supabase.co)</li>
-        <li><strong>anon/public key</strong> (long JWT string)</li>
-      </ul>
+      Go to <strong>Project Settings → API</strong> and copy the Project URL and anon/public key.
     </div>
-
     <div class="form-row" style="margin-top:4px;">
       <div class="form-group">
         <label>Supabase Project URL *</label>
@@ -332,7 +317,6 @@ ALTER TABLE hr_results DISABLE ROW LEVEL SECURITY;</div>
         <input id="sbKey" placeholder="eyJhbGciOiJIUzI1...">
       </div>
     </div>
-
     <div class="modal-actions">
       <button class="btn btn-outline" onclick="closeDbModal()">Cancel</button>
       <button class="btn btn-secondary" onclick="clearDbConfig()">Clear Config</button>
@@ -340,8 +324,6 @@ ALTER TABLE hr_results DISABLE ROW LEVEL SECURITY;</div>
     </div>
   </div>
 </div>
-
-<!-- ADD/EDIT USER MODAL -->
 <div class="modal-overlay" id="userModal">
   <div class="modal">
     <h3 id="modalTitle">Add New User</h3>
@@ -361,8 +343,6 @@ ALTER TABLE hr_results DISABLE ROW LEVEL SECURITY;</div>
     </div>
   </div>
 </div>
-
-<!-- DELETE MODAL -->
 <div class="modal-overlay" id="deleteModal">
   <div class="modal" style="width:380px;">
     <h3>⚠️ Delete User</h3>
@@ -373,8 +353,6 @@ ALTER TABLE hr_results DISABLE ROW LEVEL SECURITY;</div>
     </div>
   </div>
 </div>
-
-<!-- RESET PASSWORD MODAL -->
 <div class="modal-overlay" id="resetModal">
   <div class="modal" style="width:380px;">
     <h3>🔑 Reset Password</h3>
@@ -386,88 +364,52 @@ ALTER TABLE hr_results DISABLE ROW LEVEL SECURITY;</div>
     </div>
   </div>
 </div>
-
 <script>
-// ════════════════════════════════════════════════════════════════════
-//  SUPABASE CONFIG — hardcoded so it works on ALL devices/incognito
-// ════════════════════════════════════════════════════════════════════
-const HARDCODED_SB_URL = 'https://tytyyxdqtxnscevwetvy.supabase.co';  // ← your URL
-const HARDCODED_SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR5dHl5eGRxdHhuc2NldndldHZ5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzODUxODAsImV4cCI6MjA4ODk2MTE4MH0.YUZEtVhQa3I8cHbT2E1U7ra7TM_fDwjb5yHKkjGDPrE';                          // ← your anon key
+const HARDCODED_SB_URL = 'https://tytyyxdqtxnscevwetvy.supabase.co';
+const HARDCODED_SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR5dHl5eGRxdHhuc2NldndldHZ5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzODUxODAsImV4cCI6MjA4ODk2MTE4MH0.YUZEtVhQa3I8cHbT2E1U7ra7TM_fDwjb5yHKkjGDPrE';
+
+// ── WEBHOOK URL — Kamatera server ─────────────────────────────────
+const WEBHOOK_URL = 'https://45.151.155.209.nip.io/webhook/9fdb5c11-569d-4f29-acd2-db49248a700c';
 
 const SB_CONFIG_KEY = 'suez_sb_config';
-
 function getSbConfig() {
-  // Priority 1: hardcoded values (works on all devices, incognito, everywhere)
-  if (HARDCODED_SB_URL && HARDCODED_SB_KEY) {
-    return { url: HARDCODED_SB_URL.replace(/\/$/, ''), key: HARDCODED_SB_KEY };
-  }
-  // Priority 2: manually saved via DB Settings modal (localStorage fallback)
+  if (HARDCODED_SB_URL && HARDCODED_SB_KEY) return { url: HARDCODED_SB_URL.replace(/\/$/, ''), key: HARDCODED_SB_KEY };
   try { return JSON.parse(localStorage.getItem(SB_CONFIG_KEY)) || null; } catch(e) { return null; }
 }
-function setSbConfig(url, key) {
-  localStorage.setItem(SB_CONFIG_KEY, JSON.stringify({ url: url.replace(/\/$/, ''), key }));
-}
-function clearSbConfig() {
-  localStorage.removeItem(SB_CONFIG_KEY);
-}
+function setSbConfig(url, key) { localStorage.setItem(SB_CONFIG_KEY, JSON.stringify({ url: url.replace(/\/$/, ''), key })); }
+function clearSbConfig() { localStorage.removeItem(SB_CONFIG_KEY); }
 
-// Generic Supabase REST call
-async function sbRequest(path, method = 'GET', body = null, extraHeaders = {}) {
+async function sbRequest(path, method='GET', body=null, extraHeaders={}) {
   const cfg = getSbConfig();
   if (!cfg) throw new Error('Supabase not configured');
   const res = await fetch(`${cfg.url}/rest/v1/${path}`, {
     method,
-    headers: {
-      'apikey': cfg.key,
-      'Authorization': `Bearer ${cfg.key}`,
-      'Content-Type': 'application/json',
-      'Prefer': method === 'POST' ? 'return=representation' : '',
-      ...extraHeaders
-    },
+    headers: { 'apikey': cfg.key, 'Authorization': `Bearer ${cfg.key}`, 'Content-Type': 'application/json', 'Prefer': method==='POST'?'return=representation':'', ...extraHeaders },
     body: body ? JSON.stringify(body) : null
   });
-  if (!res.ok) {
-    const err = await res.text();
-    throw new Error(err);
-  }
-  return method === 'DELETE' ? null : res.json();
+  if (!res.ok) { const err = await res.text(); throw new Error(err); }
+  return method==='DELETE' ? null : res.json();
 }
 
-// ════════════════════════════════════════════════════════════════════
-//  DB STATUS UI
-// ════════════════════════════════════════════════════════════════════
 function setDbStatus(connected) {
-  const dot  = document.getElementById('dbDot');
+  const dot = document.getElementById('dbDot');
   const text = document.getElementById('dbStatusText');
   if (dot && text) {
-    dot.className  = 'db-dot ' + (connected ? 'connected' : 'disconnected');
+    dot.className = 'db-dot ' + (connected ? 'connected' : 'disconnected');
     text.innerText = connected ? 'DB Connected' : 'DB Local';
     text.style.color = connected ? '#276749' : '#721c24';
   }
 }
 
-// ════════════════════════════════════════════════════════════════════
-//  USER MANAGEMENT (Supabase or localStorage fallback)
-// ════════════════════════════════════════════════════════════════════
 const LOCAL_USERS_KEY = 'suez_users_v1';
-
-function getLocalUsers() {
-  try { return JSON.parse(localStorage.getItem(LOCAL_USERS_KEY)) || defaultUsers(); } catch(e) { return defaultUsers(); }
-}
+function getLocalUsers() { try { return JSON.parse(localStorage.getItem(LOCAL_USERS_KEY)) || defaultUsers(); } catch(e) { return defaultUsers(); } }
 function setLocalUsers(u) { localStorage.setItem(LOCAL_USERS_KEY, JSON.stringify(u)); }
-function defaultUsers() {
-  return [
-    { id:1, username:'admin', password:'admin123', full_name:'Super Admin', role:'admin', status:'active', created_at:'2024-01-01' }
-  ];
-}
+function defaultUsers() { return [{ id:1, username:'admin', password:'admin123', full_name:'Super Admin', role:'admin', status:'active', created_at:'2024-01-01' }]; }
 
 async function loadUsers() {
   if (getSbConfig()) {
-    try {
-      const rows = await sbRequest('hr_users?select=*&order=id.asc');
-      setDbStatus(true);
-      return rows;
-    } catch(e) { console.warn('DB load failed, using local:', e); setDbStatus(false); }
+    try { const rows = await sbRequest('hr_users?select=*&order=id.asc'); setDbStatus(true); return rows; }
+    catch(e) { console.warn('DB load failed:', e); setDbStatus(false); }
   }
   setDbStatus(false);
   return getLocalUsers();
@@ -476,214 +418,331 @@ async function loadUsers() {
 async function loginUser(username, password) {
   if (getSbConfig()) {
     try {
-      const rows = await sbRequest(
-        `hr_users?username=eq.${encodeURIComponent(username)}&password=eq.${encodeURIComponent(password)}&status=eq.active&select=*`
-      );
+      const rows = await sbRequest(`hr_users?username=eq.${encodeURIComponent(username)}&password=eq.${encodeURIComponent(password)}&status=eq.active&select=*`);
       setDbStatus(true);
       return rows.length ? rows[0] : null;
-    } catch(e) { console.warn('DB login failed, using local:', e); setDbStatus(false); }
+    } catch(e) { console.warn('DB login failed:', e); setDbStatus(false); }
   }
-  // Local fallback
   setDbStatus(false);
   const users = getLocalUsers();
-  return users.find(u => u.username === username && u.password === password && u.status === 'active') || null;
+  return users.find(u => u.username===username && u.password===password && u.status==='active') || null;
 }
 
 async function createUser(data) {
   if (getSbConfig()) {
-    const rows = await sbRequest('hr_users', 'POST', {
-      username: data.username, password: data.password,
-      full_name: data.fullName, role: data.role, status: data.status
-    });
+    const rows = await sbRequest('hr_users', 'POST', { username:data.username, password:data.password, full_name:data.fullName, role:data.role, status:data.status });
     return rows[0];
   }
-  // Local fallback
   const users = getLocalUsers();
-  if (users.find(u => u.username === data.username)) throw new Error('Username exists');
-  const nu = { id: Date.now(), username: data.username, password: data.password, full_name: data.fullName, role: data.role, status: data.status, created_at: new Date().toISOString().split('T')[0] };
-  users.push(nu);
-  setLocalUsers(users);
-  return nu;
+  if (users.find(u => u.username===data.username)) throw new Error('Username exists');
+  const nu = { id:Date.now(), username:data.username, password:data.password, full_name:data.fullName, role:data.role, status:data.status, created_at:new Date().toISOString().split('T')[0] };
+  users.push(nu); setLocalUsers(users); return nu;
 }
 
 async function updateUser(id, data) {
-  if (getSbConfig()) {
-    await sbRequest(`hr_users?id=eq.${id}`, 'PATCH', data);
-    return;
-  }
+  if (getSbConfig()) { await sbRequest(`hr_users?id=eq.${id}`, 'PATCH', data); return; }
   const users = getLocalUsers();
-  const idx = users.findIndex(u => u.id === id);
-  if (idx !== -1) { Object.assign(users[idx], data); setLocalUsers(users); }
+  const idx = users.findIndex(u => u.id===id);
+  if (idx!==-1) { Object.assign(users[idx], data); setLocalUsers(users); }
 }
 
 async function deleteUser(id) {
   if (getSbConfig()) { await sbRequest(`hr_users?id=eq.${id}`, 'DELETE'); return; }
-  const users = getLocalUsers().filter(u => u.id !== id);
-  setLocalUsers(users);
+  setLocalUsers(getLocalUsers().filter(u => u.id!==id));
 }
 
-// Save candidate results to Supabase
 async function saveResultsToDb(data, jobTitle) {
   if (!getSbConfig()) return;
   try {
     const sessionId = 'sess_' + Date.now();
-    const rows = data.map(c => ({
-      session_id: sessionId,
-      job_title: jobTitle || 'Unknown',
-      candidate_name: c['Name'] || '',
-      score: c.score,
-      ats_rating: atsColor(c.score).label,
-      result_json: c,
-      created_by: currentUser ? currentUser.username : 'unknown'
-    }));
+    const rows = data.map(c => ({ session_id:sessionId, job_title:jobTitle||'Unknown', candidate_name:c['Name']||'', score:c.score, ats_rating:atsColor(c.score).label, result_json:c, created_by:currentUser?currentUser.username:'unknown' }));
     await sbRequest('hr_results', 'POST', rows);
-    console.log('Results saved to DB ✓');
-  } catch(e) { console.warn('Could not save results to DB:', e); }
+  } catch(e) { console.warn('Could not save results:', e); }
 }
 
-// Load past results from DB
 async function loadPastResults() {
   if (!getSbConfig()) { alert('Connect Supabase DB first to load past results.'); return; }
   try {
     const rows = await sbRequest('hr_results?select=*&order=created_at.desc&limit=100');
-    if (!rows.length) { alert('No past results found in database.'); return; }
-    // Group by session
+    if (!rows.length) { alert('No past results found.'); return; }
     const sessions = {};
-    rows.forEach(r => {
-      if (!sessions[r.session_id]) sessions[r.session_id] = { time: r.created_at, job: r.job_title, items: [] };
-      sessions[r.session_id].items.push(r.result_json);
-    });
+    rows.forEach(r => { if (!sessions[r.session_id]) sessions[r.session_id]={time:r.created_at,job:r.job_title,items:[]}; sessions[r.session_id].items.push(r.result_json); });
     const latest = Object.values(sessions)[0];
     tableData = latest.items;
-    tableData.forEach(c => {
-      const raw = parseFloat(c['Overall Fit Score'] || c['overall_fit_score'] || 0);
-      c.score = Math.min(100, Math.round(raw > 1 ? raw : raw * 100));
-    });
-    tableData.sort((a, b) => b.score - a.score);
-    renderTable(tableData);
-    drawChart(tableData);
+    tableData.forEach(c => { const raw=parseFloat(c['Overall Fit Score']||c['overall_fit_score']||0); c.score=Math.min(100,Math.round(raw>1?raw:raw*100)); });
+    tableData.sort((a,b)=>b.score-a.score);
+    renderTable(tableData); drawChart(tableData);
     alert(`Loaded ${tableData.length} candidates from last session (${new Date(latest.time).toLocaleString()})`);
-  } catch(e) { alert('Error loading results: ' + e.message); }
+  } catch(e) { alert('Error: '+e.message); }
 }
 
-// ════════════════════════════════════════════════════════════════════
-//  ATS HELPERS
-// ════════════════════════════════════════════════════════════════════
 function atsColor(score) {
-  if (score >= 80) return { bg:'#d4edda', color:'#155724', border:'#28a745', label:'Strong',   emoji:'🟢' };
-  if (score >= 60) return { bg:'#fff3cd', color:'#856404', border:'#ffc107', label:'Moderate', emoji:'🟠' };
-  return                  { bg:'#f8d7da', color:'#721c24', border:'#dc3545', label:'Weak',     emoji:'🔴' };
+  if (score>=80) return {bg:'#d4edda',color:'#155724',border:'#28a745',label:'Strong',emoji:'🟢'};
+  if (score>=60) return {bg:'#fff3cd',color:'#856404',border:'#ffc107',label:'Moderate',emoji:'🟠'};
+  return {bg:'#f8d7da',color:'#721c24',border:'#dc3545',label:'Weak',emoji:'🔴'};
 }
 
 function rankMedal(i) {
-  const styles = ['background:#FFD700;color:#7a5c00;','background:#C0C0C0;color:#444;','background:#cd7f32;color:#fff;'];
-  const s = i < 3 ? styles[i] : 'background:#e9ecef;color:#555;';
+  const styles=['background:#FFD700;color:#7a5c00;','background:#C0C0C0;color:#444;','background:#cd7f32;color:#fff;'];
+  const s=i<3?styles[i]:'background:#e9ecef;color:#555;';
   return `<span class="rank-medal" style="${s}">${i+1}</span>`;
 }
 
-// ════════════════════════════════════════════════════════════════════
-//  STATE
-// ════════════════════════════════════════════════════════════════════
-let currentUser  = null;
-let editingUserId = null;
-let deletingUserId = null;
-let resettingUserId = null;
-let tableData    = [];
-let chartInstance = null;
-let abortController = null;   // ← for cancel button
-let timerInterval   = null;
+let currentUser=null, editingUserId=null, deletingUserId=null, resettingUserId=null;
+let tableData=[], chartInstance=null, abortController=null, timerInterval=null;
 
-// ════════════════════════════════════════════════════════════════════
-//  AUTH
-// ════════════════════════════════════════════════════════════════════
 async function login() {
-  const u = document.getElementById('username').value.trim();
-  const p = document.getElementById('password').value;
-  const btn = document.getElementById('loginBtn');
-  btn.innerText = 'Signing in...'; btn.disabled = true;
+  const u=document.getElementById('username').value.trim();
+  const p=document.getElementById('password').value;
+  const btn=document.getElementById('loginBtn');
+  btn.innerText='Signing in...'; btn.disabled=true;
   try {
-    const user = await loginUser(u, p);
+    const user=await loginUser(u,p);
     if (user) {
-      currentUser = user;
-      document.getElementById('loginPage').style.display = 'none';
-      document.getElementById('app').style.display = 'block';
-      document.getElementById('loginError').style.display = 'none';
+      currentUser=user;
+      document.getElementById('loginPage').style.display='none';
+      document.getElementById('app').style.display='block';
+      document.getElementById('loginError').style.display='none';
       initApp();
     } else {
-      document.getElementById('loginError').style.display = 'block';
+      document.getElementById('loginError').style.display='block';
     }
   } catch(e) {
-    document.getElementById('loginError').innerText = 'Login error: ' + e.message;
-    document.getElementById('loginError').style.display = 'block';
+    document.getElementById('loginError').innerText='Login error: '+e.message;
+    document.getElementById('loginError').style.display='block';
   }
-  btn.innerText = 'Sign In'; btn.disabled = false;
+  btn.innerText='Sign In'; btn.disabled=false;
 }
 
-function logout() { currentUser = null; location.reload(); }
+function logout() { currentUser=null; location.reload(); }
 
 async function initApp() {
-  const fullName = currentUser.full_name || currentUser.fullName || currentUser.username;
-  document.getElementById('welcomeName').innerText = fullName;
-  document.getElementById('headerUserBadge').innerText = currentUser.username;
-  if (currentUser.role === 'admin') {
-    document.getElementById('headerRoleBadge').style.display = 'inline-block';
-    document.getElementById('adminNav').style.display = 'block';
-    document.getElementById('userMgmtNav').style.display = 'flex';
-    document.getElementById('dbConfigNav').style.display = 'flex';
-    const users = await loadUsers();
-    document.getElementById('statUsers').innerText = users.length;
+  const fullName=currentUser.full_name||currentUser.fullName||currentUser.username;
+  document.getElementById('welcomeName').innerText=fullName;
+  document.getElementById('headerUserBadge').innerText=currentUser.username;
+  if (currentUser.role==='admin') {
+    document.getElementById('headerRoleBadge').style.display='inline-block';
+    document.getElementById('adminNav').style.display='block';
+    document.getElementById('userMgmtNav').style.display='flex';
+    document.getElementById('jdMgmtNav').style.display='flex';
+    document.getElementById('dbConfigNav').style.display='flex';
+    const users=await loadUsers();
+    document.getElementById('statUsers').innerText=users.length;
   }
-  // Show banner if DB not configured
-  if (!getSbConfig()) {
-    document.getElementById('loginDbBanner').style.display = 'block';
-  }
-  updateDbStatusDisplay();
-}
-
-function updateDbStatusDisplay() {
+  if (!getSbConfig()) document.getElementById('loginDbBanner').style.display='block';
   setDbStatus(!!getSbConfig());
 }
 
-// ════════════════════════════════════════════════════════════════════
-//  NAVIGATION
-// ════════════════════════════════════════════════════════════════════
 function showPage(name) {
-  if (name === 'userManagement' && currentUser.role !== 'admin') { alert('Access denied.'); return; }
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
-  document.getElementById('page-' + name).classList.add('active');
-  document.querySelectorAll('.sidebar a').forEach(a => {
-    if (a.getAttribute('onclick') && a.getAttribute('onclick').includes(name)) a.classList.add('active');
-  });
-  if (name === 'userManagement') renderUserTable();
+  if (name==='userManagement'&&currentUser.role!=='admin') { alert('Access denied.'); return; }
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.sidebar a').forEach(a=>a.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  document.querySelectorAll('.sidebar a').forEach(a=>{ if(a.getAttribute('onclick')&&a.getAttribute('onclick').includes(name)) a.classList.add('active'); });
+  if (name==='userManagement') renderUserTable();
 }
 
-// ════════════════════════════════════════════════════════════════════
-//  UPLOAD & ANALYSIS  (with Cancel support)
-// ════════════════════════════════════════════════════════════════════
-function updateProgress(p, t) {
-  document.getElementById('progressBar').style.width = p + '%';
-  document.getElementById('status').innerText = t;
+function updateProgress(p,t) {
+  document.getElementById('progressBar').style.width=p+'%';
+  document.getElementById('status').innerText=t;
 }
 
 function setAnalyzing(active) {
-  document.getElementById('submitBtn').disabled = active;
-  document.getElementById('submitBtn').style.opacity = active ? '0.5' : '1';
-  document.getElementById('cancelBtn').style.display = active ? 'inline-flex' : 'none';
+  document.getElementById('submitBtn').disabled=active;
+  document.getElementById('submitBtn').style.opacity=active?'0.5':'1';
+  document.getElementById('cancelBtn').style.display=active?'inline-flex':'none';
 }
 
 function cancelAnalysis() {
   if (abortController) abortController.abort();
   if (timerInterval) clearInterval(timerInterval);
   setAnalyzing(false);
-  updateProgress(0, '⛔ Cancelled by user.');
-  document.getElementById('timer').innerText = '0';
+  updateProgress(0,'⛔ Cancelled by user.');
+  document.getElementById('timer').innerText='0';
 }
 
+
+// ── JD LIBRARY ────────────────────────────────────────────────────
+const JD_KEY = 'suez_jd_library';
+
+function getLocalJDs() { try { return JSON.parse(localStorage.getItem(JD_KEY)) || []; } catch(e) { return []; } }
+function setLocalJDs(jds) { localStorage.setItem(JD_KEY, JSON.stringify(jds)); }
+
+async function loadJDs() {
+  if (getSbConfig()) {
+    try {
+      const rows = await sbRequest('hr_jd_library?select=*&order=created_at.desc');
+      return rows || [];
+    } catch(e) { return getLocalJDs(); }
+  }
+  return getLocalJDs();
+}
+
+async function saveJD(jd) {
+  if (getSbConfig()) {
+    try { await sbRequest('hr_jd_library', 'POST', [jd]); return; } catch(e) {}
+  }
+  const jds = getLocalJDs();
+  jds.unshift(jd);
+  setLocalJDs(jds);
+}
+
+async function deleteJD(id) {
+  if (getSbConfig()) {
+    try { await sbRequest(`hr_jd_library?id=eq.${id}`, 'DELETE'); return; } catch(e) {}
+  }
+  setLocalJDs(getLocalJDs().filter(j => j.id !== id));
+}
+
+function toggleJdSource() {
+  const fromLib = document.getElementById('jdFromLibrary').checked;
+  document.getElementById('jdLibrarySelect').style.display = fromLib ? 'block' : 'none';
+  document.getElementById('jdUploadInput').style.display = fromLib ? 'none' : 'block';
+  if (fromLib) loadJdDropdown();
+}
+
+async function loadJdDropdown() {
+  const jds = await loadJDs();
+  const sel = document.getElementById('jdDropdown');
+  sel.innerHTML = '<option value="">-- Select a Job Description --</option>';
+  jds.forEach(j => {
+    const opt = document.createElement('option');
+    opt.value = j.id;
+    opt.textContent = j.title + (j.file_name ? ` (${j.file_name})` : '');
+    opt.dataset.content = j.content || '';
+    opt.dataset.filename = j.file_name || j.title;
+    sel.appendChild(opt);
+  });
+  sel.onchange = () => {
+    const opt = sel.options[sel.selectedIndex];
+    if (opt.value) {
+      document.getElementById('jdSelectedInfo').innerText = '✅ Selected: ' + opt.textContent;
+    } else {
+      document.getElementById('jdSelectedInfo').innerText = '';
+    }
+  };
+}
+
+async function renderJdTable() {
+  const tbody = document.getElementById('jdTableBody');
+  tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:#888;">Loading...</td></tr>';
+  const jds = await loadJDs();
+  if (!jds.length) { tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:#888;">No JDs uploaded yet.</td></tr>'; return; }
+  tbody.innerHTML = jds.map((j,i) => `
+    <tr>
+      <td>${i+1}</td>
+      <td><strong>${j.title||'—'}</strong></td>
+      <td style="font-size:12px;color:#888;">${j.file_name||'—'}</td>
+      <td>${j.uploaded_by||'—'}</td>
+      <td>${j.created_at||'—'}</td>
+      <td><button class="btn btn-danger btn-sm" onclick="confirmDeleteJd('${j.id}')">Delete</button></td>
+    </tr>`).join('');
+}
+
+async function confirmDeleteJd(id) {
+  if (!confirm('Delete this JD?')) return;
+  await deleteJD(id);
+  renderJdTable();
+  showJdAlert('JD deleted.', 'success');
+}
+
+function showJdAlert(msg, type) {
+  document.getElementById('jdAlert').innerHTML = `<div class="alert alert-${type==='error'?'error':'success'}">${msg}</div>`;
+  setTimeout(() => { document.getElementById('jdAlert').innerHTML = ''; }, 3000);
+}
+
+let jdUploadModal = null;
+
+function openAddJd() {
+  const modal = document.createElement('div');
+  modal.className = 'modal-overlay open';
+  modal.id = 'jdModal';
+  modal.innerHTML = `
+    <div class="modal-box">
+      <div class="modal-header"><span>Upload New Job Description</span><button onclick="document.getElementById('jdModal').remove()" style="background:none;border:none;font-size:20px;cursor:pointer;">×</button></div>
+      <div style="padding:20px;">
+        <div id="jdModalAlert"></div>
+        <div class="form-group">
+          <label>Job Title *</label>
+          <input id="jdTitle" placeholder="e.g. Customer Service Manager" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:7px;font-size:14px;">
+        </div>
+        <div class="form-group">
+          <label>JD File (PDF/DOC) *</label>
+          <input type="file" id="jdFile" accept=".pdf,.doc,.docx">
+        </div>
+        <div class="modal-actions">
+          <button class="btn btn-outline" onclick="document.getElementById('jdModal').remove()">Cancel</button>
+          <button class="btn btn-primary" onclick="saveNewJd()">💾 Save JD</button>
+        </div>
+      </div>
+    </div>`;
+  document.body.appendChild(modal);
+}
+
+async function saveNewJd() {
+  const title = document.getElementById('jdTitle').value.trim();
+  const file = document.getElementById('jdFile').files[0];
+  if (!title) { document.getElementById('jdModalAlert').innerHTML='<div class="alert alert-error">Job title is required.</div>'; return; }
+  if (!file) { document.getElementById('jdModalAlert').innerHTML='<div class="alert alert-error">Please select a JD file.</div>'; return; }
+
+  document.getElementById('jdModalAlert').innerHTML='<div class="alert alert-info">⏳ Saving...</div>';
+
+  const reader = new FileReader();
+  reader.onload = async (e) => {
+    const jd = {
+      id: 'jd_' + Date.now(),
+      title,
+      file_name: file.name,
+      file_data: e.target.result,
+      file_type: file.type,
+      uploaded_by: currentUser ? currentUser.username : 'admin',
+      created_at: new Date().toISOString().split('T')[0]
+    };
+    await saveJD(jd);
+    document.getElementById('jdModal').remove();
+    renderJdTable();
+    showJdAlert('JD uploaded successfully!', 'success');
+  };
+  reader.readAsDataURL(file);
+}
+
+// Hook into showPage to load JD data
+const _origShowPage = showPage;
+function showPage(name) {
+  _origShowPage(name);
+  if (name === 'jdManagement') renderJdTable();
+  if (name === 'upload') {
+    document.getElementById('jdFromUpload').checked = true;
+    toggleJdSource();
+  }
+}
+
+// ── UPDATED ANALYZE — supports both JD sources ────────────────────
 document.getElementById('submitBtn').addEventListener('click', async () => {
-  const jd      = document.getElementById('job_description').files[0];
+  const fromLib = document.getElementById('jdFromLibrary').checked;
   const resumes = document.getElementById('resume').files;
-  if (!jd || resumes.length === 0) { alert('Upload JD and resumes'); return; }
+
+  let jdFile = null;
+  let jdName = '';
+
+  if (fromLib) {
+    const sel = document.getElementById('jdDropdown');
+    const opt = sel.options[sel.selectedIndex];
+    if (!opt.value) { alert('Please select a Job Description from the library.'); return; }
+    const jds = await loadJDs();
+    const selectedJd = jds.find(j => j.id === opt.value);
+    if (!selectedJd || !selectedJd.file_data) { alert('JD file data not found. Please re-upload.'); return; }
+    const res = await fetch(selectedJd.file_data);
+    const blob = await res.blob();
+    jdFile = new File([blob], selectedJd.file_name, { type: selectedJd.file_type || 'application/pdf' });
+    jdName = selectedJd.file_name;
+  } else {
+    jdFile = document.getElementById('job_description').files[0];
+    if (!jdFile) { alert('Please upload a Job Description file.'); return; }
+    jdName = jdFile.name;
+  }
+
+  if (resumes.length === 0) { alert('Please select resume files.'); return; }
 
   abortController = new AbortController();
   let seconds = 0;
@@ -693,17 +752,14 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
   updateProgress(20, 'Uploading resumes...');
 
   const formData = new FormData();
-  formData.append('job_description', jd);
+  formData.append('job_description', jdFile);
   for (let i = 0; i < resumes.length; i++) formData.append('resume', resumes[i]);
 
   updateProgress(50, 'AI analyzing resumes...');
 
   let data;
   try {
-    const response = await fetch(
-      'http://45.151.155.209:5678/webhook/9fdb5c11-569d-4f29-acd2-db49248a700c',
-      { method:'POST', body:formData, signal: abortController.signal }
-    );
+    const response = await fetch(WEBHOOK_URL, { method: 'POST', body: formData, signal: abortController.signal });
     data = await response.json();
   } catch(e) {
     clearInterval(timerInterval);
@@ -723,304 +779,215 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
   document.getElementById('status').style.color = '#555';
 
   if (!Array.isArray(data)) data = [data];
-
-  data.forEach(c => {
-    const raw = parseFloat(c['Overall Fit Score'] || c['overall_fit_score'] || c['Similarity'] || 0);
-    c.score = Math.min(100, Math.round(raw > 1 ? raw : raw * 100));
-  });
+  data.forEach(c => { const raw = parseFloat(c['Overall Fit Score']||c['overall_fit_score']||c['Similarity']||0); c.score = Math.min(100, Math.round(raw > 1 ? raw : raw * 100)); });
   data.sort((a, b) => b.score - a.score);
   tableData = data;
 
   document.getElementById('statCandidates').innerText = data.length;
   document.getElementById('statTopScore').innerText = data[0] ? data[0].score + '%' : '—';
 
-  // Save to DB
-  await saveResultsToDb(data, jd.name);
-
+  await saveResultsToDb(data, jdName);
   showPage('results');
   renderTable(data);
   drawChart(data);
   updateProgress(100, '✅ Completed');
 });
 
-// ════════════════════════════════════════════════════════════════════
-//  RENDER TABLE
-// ════════════════════════════════════════════════════════════════════
+
 function renderTable(data) {
-  let html = `<div style="overflow-x:auto;"><table>
-    <tr>
-      <th>Rank</th><th>Name</th><th>Current Company</th><th>Current Designation</th>
-      <th>Previous Employer</th><th>Previous Designation</th>
-      <th>Total Experience</th><th>Relevance Exp</th>
-      <th style="min-width:145px;">Fit Score</th><th>ATS Match</th>
-      <th style="min-width:180px;">Final Notes</th>
-    </tr>`;
-  data.forEach((c, i) => {
-    const sc = atsColor(c.score);
-    html += `<tr style="border-left:4px solid ${sc.border};background:${sc.bg}14;">
+  let html=`<div style="overflow-x:auto;"><table><tr>
+    <th>Rank</th><th>Name</th><th>Current Company</th><th>Current Designation</th>
+    <th>Previous Employer</th><th>Previous Designation</th>
+    <th>Total Experience</th><th>Relevance Exp</th>
+    <th style="min-width:145px;">Fit Score</th><th>ATS Match</th>
+    <th style="min-width:180px;">Final Notes</th>
+  </tr>`;
+  data.forEach((c,i)=>{
+    const sc=atsColor(c.score);
+    html+=`<tr style="border-left:4px solid ${sc.border};background:${sc.bg}14;">
       <td>${rankMedal(i)}</td>
-      <td><strong>${c['Name'] || ''}</strong></td>
-      <td>${c['Current Company'] || ''}</td>
-      <td>${c['Current Designation'] || ''}</td>
-      <td>${c['Previous Employer'] || ''}</td>
-      <td>${c['Previous Designation'] || ''}</td>
-      <td>${c['Total Working Experience'] || ''}</td>
-      <td>${c['Relevance Experience'] || ''}</td>
-      <td>
-        <div class="score-wrap">
-          <div class="score-bar-bg"><div class="score-bar-fill" style="width:${c.score}%;background:${sc.border};"></div></div>
-          <span class="score-pct" style="color:${sc.border};">${c.score}%</span>
-        </div>
-      </td>
+      <td><strong>${c['Name']||''}</strong></td>
+      <td>${c['Current Company']||''}</td>
+      <td>${c['Current Designation']||''}</td>
+      <td>${c['Previous Employer']||''}</td>
+      <td>${c['Previous Designation']||''}</td>
+      <td>${c['Total Working Experience']||''}</td>
+      <td>${c['Relevance Experience']||''}</td>
+      <td><div class="score-wrap"><div class="score-bar-bg"><div class="score-bar-fill" style="width:${c.score}%;background:${sc.border};"></div></div><span class="score-pct" style="color:${sc.border};">${c.score}%</span></div></td>
       <td><span class="ats-badge" style="background:${sc.bg};color:${sc.color};border-color:${sc.border};">${sc.emoji} ${sc.label}</span></td>
-      <td style="font-size:12px;color:#555;">${c['final_notes'] || c['Final Notes'] || ''}</td>
+      <td style="font-size:12px;color:#555;">${c['final_notes']||c['Final Notes']||''}</td>
     </tr>`;
   });
-  html += '</table></div>';
-  document.getElementById('result').innerHTML = html;
+  html+='</table></div>';
+  document.getElementById('result').innerHTML=html;
 }
 
-// ════════════════════════════════════════════════════════════════════
-//  CHART
-// ════════════════════════════════════════════════════════════════════
 function drawChart(data) {
   if (chartInstance) chartInstance.destroy();
-  chartInstance = new Chart(document.getElementById('chart'), {
-    type: 'bar',
-    data: {
-      labels: data.map(x => x['Name']),
-      datasets: [{ label:'Fit Score (%)', data:data.map(x=>x.score), backgroundColor:data.map(x=>atsColor(x.score).border), borderRadius:5 }]
-    },
-    options: {
-      responsive:true, maintainAspectRatio:false,
-      plugins: { legend:{display:false}, tooltip:{ callbacks:{ label: ctx => ` ${ctx.raw}% — ${atsColor(ctx.raw).label}` } } },
-      scales: { y:{ beginAtZero:true, max:100, ticks:{ callback:v=>v+'%' }, grid:{color:'#f0f0f0'} }, x:{ grid:{display:false} } }
+  chartInstance=new Chart(document.getElementById('chart'),{
+    type:'bar',
+    data:{ labels:data.map(x=>x['Name']), datasets:[{label:'Fit Score (%)',data:data.map(x=>x.score),backgroundColor:data.map(x=>atsColor(x.score).border),borderRadius:5}] },
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>` ${ctx.raw}% — ${atsColor(ctx.raw).label}`}}},
+      scales:{y:{beginAtZero:true,max:100,ticks:{callback:v=>v+'%'},grid:{color:'#f0f0f0'}},x:{grid:{display:false}}}
     }
   });
 }
 
-// ════════════════════════════════════════════════════════════════════
-//  EXCEL DOWNLOAD
-// ════════════════════════════════════════════════════════════════════
 function downloadExcel() {
   if (!tableData.length) { alert('No data to download. Run analysis first.'); return; }
-  const excelData = tableData.map((c, i) => ({
-    'Rank'                        : i + 1,
-    'ATS Rating'                  : atsColor(c.score).label,
-    'Fit Score (%)'               : c.score,
-    'Name'                        : c['Name']                           || '',
-    'Gender'                      : c['Gender']                         || '',
-    'Education'                   : c['Education']                      || '',
-    'Current Company'             : c['Current Company']                || '',
-    'Current Designation'         : c['Current Designation']            || '',
-    'Current Employment Tenure'   : c['Current Employement Tenure']     || '',
-    'Previous Employer'           : c['Previous Employer']              || '',
-    'Previous Designation'        : c['Previous Designation']           || '',
-    'Previous Employment Tenure'  : c['Employement Tenure']             || '',
-    'Total Working Experience'    : c['Total Working Experience']       || '',
-    'Relevance Experience'        : c['Relevance Experience']           || '',
-    'Graduation'                  : c['Graduation']                     || '',
-    'Specialisation'              : c['Specialisation']                 || '',
-    'Post Graduate'               : c['Post Graduate']                  || '',
-    'Specialisation PG'           : c['Specialisation PG']              || '',
-    'Key Skills'                  : c['Key Skills']                     || '',
-    'Overall Fit Score (raw)'     : c['Overall Fit Score']              || '',
-    'Similarity Score'            : c['similarity_score']               || '',
-    'Skill Similarity'            : c['skill_similarity']               || '',
-    'Applied Position'            : c['applied_position']               || '',
-    'Recommendation'              : c['recommendation']                 || '',
-    'Required Experience Match'   : c['required_experience_match']      || '',
-    'Skill Match Summary'         : c['skill_match_summary']            || '',
-    'Education & Cert Match'      : c['education_certifications_match'] || '',
-    'Soft Skills Traits'          : c['soft_skills_traits']             || '',
-    'Strengths'                   : c['Strengths']    || c['strengths']         || '',
-    'Concerns / Gaps'             : c['Concerns/Gaps'] || c['concerns_or_gaps'] || '',
-    'Final Notes'                 : c['Final Notes']  || c['final_notes']       || ''
+  const excelData=tableData.map((c,i)=>({
+    'Rank':i+1,'ATS Rating':atsColor(c.score).label,'Fit Score (%)':c.score,
+    'Name':c['Name']||'','Gender':c['Gender']||'','Education':c['Education']||'',
+    'Current Company':c['Current Company']||'','Current Designation':c['Current Designation']||'',
+    'Current Employment Tenure':c['Current Employement Tenure']||'',
+    'Previous Employer':c['Previous Employer']||'','Previous Designation':c['Previous Designation']||'',
+    'Previous Employment Tenure':c['Employement Tenure']||'',
+    'Total Working Experience':c['Total Working Experience']||'',
+    'Relevance Experience':c['Relevance Experience']||'',
+    'Graduation':c['Graduation']||'','Specialisation':c['Specialisation']||'',
+    'Post Graduate':c['Post Graduate']||'','Specialisation PG':c['Specialisation PG']||'',
+    'Key Skills':c['Key Skills']||'','Overall Fit Score (raw)':c['Overall Fit Score']||'',
+    'Similarity Score':c['similarity_score']||'','Skill Similarity':c['skill_similarity']||'',
+    'Applied Position':c['applied_position']||'','Recommendation':c['recommendation']||'',
+    'Required Experience Match':c['required_experience_match']||'',
+    'Skill Match Summary':c['skill_match_summary']||'',
+    'Education & Cert Match':c['education_certifications_match']||'',
+    'Soft Skills Traits':c['soft_skills_traits']||'',
+    'Strengths':c['Strengths']||c['strengths']||'',
+    'Concerns / Gaps':c['Concerns/Gaps']||c['concerns_or_gaps']||'',
+    'Final Notes':c['Final Notes']||c['final_notes']||''
   }));
-  const ws = XLSX.utils.json_to_sheet(excelData);
-  const colWidths = Object.keys(excelData[0]||{}).map(k => ({ wch: Math.min(60, Math.max(k.length+2, ...excelData.map(r=>String(r[k]||'').length))) }));
-  ws['!cols'] = colWidths;
-  const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, 'Candidates');
-  XLSX.writeFile(wb, 'Candidate_AI_Screening.xlsx');
+  const ws=XLSX.utils.json_to_sheet(excelData);
+  const colWidths=Object.keys(excelData[0]||{}).map(k=>({wch:Math.min(60,Math.max(k.length+2,...excelData.map(r=>String(r[k]||'').length)))}));
+  ws['!cols']=colWidths;
+  const wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,'Candidates');
+  XLSX.writeFile(wb,'Candidate_AI_Screening.xlsx');
 }
 
-// ════════════════════════════════════════════════════════════════════
-//  DB CONFIG MODAL
-// ════════════════════════════════════════════════════════════════════
 function openDbConfig() {
-  const cfg = getSbConfig();
-  if (cfg) { document.getElementById('sbUrl').value = cfg.url; document.getElementById('sbKey').value = cfg.key; }
-  document.getElementById('dbModalAlert').innerHTML = '';
+  const cfg=getSbConfig();
+  if (cfg) { document.getElementById('sbUrl').value=cfg.url; document.getElementById('sbKey').value=cfg.key; }
+  document.getElementById('dbModalAlert').innerHTML='';
   document.getElementById('dbModal').classList.add('open');
 }
 
 async function saveDbConfig() {
-  const url = document.getElementById('sbUrl').value.trim();
-  const key = document.getElementById('sbKey').value.trim();
-  if (!url || !key) { document.getElementById('dbModalAlert').innerHTML = '<div class="alert alert-error">Both URL and Key are required.</div>'; return; }
-  document.getElementById('dbModalAlert').innerHTML = '<div class="alert alert-info">⏳ Testing connection...</div>';
-  setSbConfig(url, key);
+  const url=document.getElementById('sbUrl').value.trim();
+  const key=document.getElementById('sbKey').value.trim();
+  if (!url||!key) { document.getElementById('dbModalAlert').innerHTML='<div class="alert alert-error">Both URL and Key are required.</div>'; return; }
+  document.getElementById('dbModalAlert').innerHTML='<div class="alert alert-info">⏳ Testing connection...</div>';
+  setSbConfig(url,key);
   try {
     await sbRequest('hr_users?select=id&limit=1');
-    document.getElementById('dbModalAlert').innerHTML = '<div class="alert alert-success">✅ Connected successfully! Users will now sync across all devices.</div>';
+    document.getElementById('dbModalAlert').innerHTML='<div class="alert alert-success">✅ Connected successfully!</div>';
     setDbStatus(true);
-    document.getElementById('loginDbBanner').style.display = 'none';
+    document.getElementById('loginDbBanner').style.display='none';
   } catch(e) {
-    document.getElementById('dbModalAlert').innerHTML = `<div class="alert alert-error">❌ Connection failed: ${e.message}<br><small>Check your URL and Key, and make sure the SQL was run.</small></div>`;
+    document.getElementById('dbModalAlert').innerHTML=`<div class="alert alert-error">❌ Connection failed: ${e.message}</div>`;
     setDbStatus(false);
   }
 }
 
 function clearDbConfig() {
   clearSbConfig();
-  document.getElementById('sbUrl').value = '';
-  document.getElementById('sbKey').value = '';
-  document.getElementById('dbModalAlert').innerHTML = '<div class="alert alert-warning">Config cleared. Using local storage.</div>';
+  document.getElementById('sbUrl').value='';
+  document.getElementById('sbKey').value='';
+  document.getElementById('dbModalAlert').innerHTML='<div class="alert alert-warning">Config cleared.</div>';
   setDbStatus(false);
 }
 
 function closeDbModal() { document.getElementById('dbModal').classList.remove('open'); }
 
 function copySQL() {
-  const sql = document.querySelector('.db-step pre, .db-step div[style*="background:#1a2332"]').innerText;
-  navigator.clipboard.writeText(sql).then(() => alert('SQL copied to clipboard!')).catch(() => alert('Please manually copy the SQL above.'));
+  const el=document.querySelector('.db-step div[style*="background:#1a2332"]');
+  if (el) navigator.clipboard.writeText(el.innerText).then(()=>alert('SQL copied!')).catch(()=>alert('Please copy manually.'));
 }
 
-// ════════════════════════════════════════════════════════════════════
-//  USER MANAGEMENT
-// ════════════════════════════════════════════════════════════════════
 async function renderUserTable() {
-  const tbody = document.getElementById('userTableBody');
-  tbody.innerHTML = '<tr><td colspan="7" style="color:#888;text-align:center;">Loading...</td></tr>';
-  const users = await loadUsers();
-  if (!users.length) { tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#888;">No users.</td></tr>'; return; }
-  tbody.innerHTML = users.map((u, i) => `
+  const tbody=document.getElementById('userTableBody');
+  tbody.innerHTML='<tr><td colspan="7" style="color:#888;text-align:center;">Loading...</td></tr>';
+  const users=await loadUsers();
+  if (!users.length) { tbody.innerHTML='<tr><td colspan="7" style="text-align:center;color:#888;">No users.</td></tr>'; return; }
+  tbody.innerHTML=users.map((u,i)=>`
     <tr>
-      <td>${i+1}</td>
-      <td><strong>${u.username}</strong></td>
-      <td>${u.full_name || u.fullName || '—'}</td>
+      <td>${i+1}</td><td><strong>${u.username}</strong></td>
+      <td>${u.full_name||u.fullName||'—'}</td>
       <td><span class="badge ${u.role==='admin'?'badge-admin':'badge-user'}">${u.role}</span></td>
       <td><span class="badge ${u.status==='active'?'badge-active':'badge-inactive'}">${u.status}</span></td>
-      <td>${u.created_at || '—'}</td>
+      <td>${u.created_at||'—'}</td>
       <td style="white-space:nowrap;">
         <button class="btn btn-outline btn-sm" onclick="openEditUser(${u.id})">Edit</button>
         <button class="btn btn-warning btn-sm" style="margin:0 4px;" onclick="openResetPassword(${u.id},'${u.username}')">Reset Pwd</button>
-        <button class="btn btn-danger btn-sm" onclick="openDeleteUser(${u.id},'${u.username}')" ${u.id===currentUser.id?'disabled title="Cannot delete yourself"':''}>Delete</button>
+        <button class="btn btn-danger btn-sm" onclick="openDeleteUser(${u.id},'${u.username}')" ${u.id===currentUser.id?'disabled':''}>Delete</button>
       </td>
     </tr>`).join('');
 }
 
 function openAddUser() {
-  editingUserId = null;
-  document.getElementById('modalTitle').innerText = 'Add New User';
-  ['modalUsername','modalFullName','modalPassword'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('modalRole').value = 'user';
-  document.getElementById('modalStatus').value = 'active';
-  document.getElementById('modalUsername').disabled = false;
-  document.getElementById('modalPassword').placeholder = 'Set password';
-  document.getElementById('modalAlert').innerHTML = '';
+  editingUserId=null;
+  document.getElementById('modalTitle').innerText='Add New User';
+  ['modalUsername','modalFullName','modalPassword'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('modalRole').value='user';
+  document.getElementById('modalStatus').value='active';
+  document.getElementById('modalUsername').disabled=false;
+  document.getElementById('modalPassword').placeholder='Set password';
+  document.getElementById('modalAlert').innerHTML='';
   document.getElementById('userModal').classList.add('open');
 }
 
 async function openEditUser(id) {
-  const users = await loadUsers();
-  const u = users.find(x => x.id === id); if (!u) return;
-  editingUserId = id;
-  document.getElementById('modalTitle').innerText = 'Edit User';
-  document.getElementById('modalUsername').value = u.username;
-  document.getElementById('modalFullName').value = u.full_name || u.fullName || '';
-  document.getElementById('modalPassword').value = '';
-  document.getElementById('modalRole').value = u.role;
-  document.getElementById('modalStatus').value = u.status;
-  document.getElementById('modalUsername').disabled = true;
-  document.getElementById('modalPassword').placeholder = 'Leave blank to keep current';
-  document.getElementById('modalAlert').innerHTML = '';
+  const users=await loadUsers();
+  const u=users.find(x=>x.id===id); if (!u) return;
+  editingUserId=id;
+  document.getElementById('modalTitle').innerText='Edit User';
+  document.getElementById('modalUsername').value=u.username;
+  document.getElementById('modalFullName').value=u.full_name||u.fullName||'';
+  document.getElementById('modalPassword').value='';
+  document.getElementById('modalRole').value=u.role;
+  document.getElementById('modalStatus').value=u.status;
+  document.getElementById('modalUsername').disabled=true;
+  document.getElementById('modalPassword').placeholder='Leave blank to keep current';
+  document.getElementById('modalAlert').innerHTML='';
   document.getElementById('userModal').classList.add('open');
 }
 
 async function saveUser() {
-  const username = document.getElementById('modalUsername').value.trim();
-  const fullName = document.getElementById('modalFullName').value.trim();
-  const password = document.getElementById('modalPassword').value;
-  const role     = document.getElementById('modalRole').value;
-  const status   = document.getElementById('modalStatus').value;
-
-  if (!username || !fullName) { showModalAlert('Username and Full Name are required.', 'error'); return; }
-  if (!editingUserId && !password) { showModalAlert('Password is required for new users.', 'error'); return; }
-
+  const username=document.getElementById('modalUsername').value.trim();
+  const fullName=document.getElementById('modalFullName').value.trim();
+  const password=document.getElementById('modalPassword').value;
+  const role=document.getElementById('modalRole').value;
+  const status=document.getElementById('modalStatus').value;
+  if (!username||!fullName) { showModalAlert('Username and Full Name are required.','error'); return; }
+  if (!editingUserId&&!password) { showModalAlert('Password is required for new users.','error'); return; }
   try {
     if (editingUserId) {
-      const patch = { full_name:fullName, role, status };
-      if (password) patch.password = password;
-      await updateUser(editingUserId, patch);
-      showUserAlert('User updated.', 'success');
+      const patch={full_name:fullName,role,status};
+      if (password) patch.password=password;
+      await updateUser(editingUserId,patch);
+      showUserAlert('User updated.','success');
     } else {
-      await createUser({ username, fullName, password, role, status });
-      showUserAlert('User created.', 'success');
+      await createUser({username,fullName,password,role,status});
+      showUserAlert('User created.','success');
     }
-    closeModal();
-    renderUserTable();
-    const users = await loadUsers();
-    document.getElementById('statUsers').innerText = users.length;
-  } catch(e) {
-    showModalAlert('Error: ' + e.message, 'error');
-  }
+    closeModal(); renderUserTable();
+    const users=await loadUsers();
+    document.getElementById('statUsers').innerText=users.length;
+  } catch(e) { showModalAlert('Error: '+e.message,'error'); }
 }
 
-function openDeleteUser(id, username) {
-  deletingUserId = id;
-  document.getElementById('deleteUserName').innerText = username;
-  document.getElementById('deleteModal').classList.add('open');
-}
-
-async function confirmDelete() {
-  await deleteUser(deletingUserId);
-  closeDeleteModal();
-  renderUserTable();
-  showUserAlert('User deleted.', 'success');
-  const users = await loadUsers();
-  document.getElementById('statUsers').innerText = users.length;
-}
-
-function openResetPassword(id, username) {
-  resettingUserId = id;
-  document.getElementById('resetUserName').innerText = username;
-  document.getElementById('resetPassword').value = '';
-  document.getElementById('resetModal').classList.add('open');
-}
-
-async function confirmReset() {
-  const pwd = document.getElementById('resetPassword').value;
-  if (!pwd) { alert('Enter a new password.'); return; }
-  await updateUser(resettingUserId, { password: pwd });
-  closeResetModal();
-  showUserAlert('Password reset successfully.', 'success');
-}
-
-function closeModal()       { document.getElementById('userModal').classList.remove('open'); }
+function openDeleteUser(id,username) { deletingUserId=id; document.getElementById('deleteUserName').innerText=username; document.getElementById('deleteModal').classList.add('open'); }
+async function confirmDelete() { await deleteUser(deletingUserId); closeDeleteModal(); renderUserTable(); showUserAlert('User deleted.','success'); const users=await loadUsers(); document.getElementById('statUsers').innerText=users.length; }
+function openResetPassword(id,username) { resettingUserId=id; document.getElementById('resetUserName').innerText=username; document.getElementById('resetPassword').value=''; document.getElementById('resetModal').classList.add('open'); }
+async function confirmReset() { const pwd=document.getElementById('resetPassword').value; if (!pwd) { alert('Enter a new password.'); return; } await updateUser(resettingUserId,{password:pwd}); closeResetModal(); showUserAlert('Password reset successfully.','success'); }
+function closeModal() { document.getElementById('userModal').classList.remove('open'); }
 function closeDeleteModal() { document.getElementById('deleteModal').classList.remove('open'); }
-function closeResetModal()  { document.getElementById('resetModal').classList.remove('open'); }
-
-function showModalAlert(msg, type) {
-  document.getElementById('modalAlert').innerHTML = `<div class="alert alert-${type==='error'?'error':'success'}">${msg}</div>`;
-}
-function showUserAlert(msg, type) {
-  document.getElementById('userAlert').innerHTML = `<div class="alert alert-${type==='error'?'error':'success'}">${msg}</div>`;
-  setTimeout(() => { document.getElementById('userAlert').innerHTML = ''; }, 3000);
-}
-
-document.querySelectorAll('.modal-overlay').forEach(el => {
-  el.addEventListener('click', function(e) { if (e.target === this) this.classList.remove('open'); });
-});
-
-// Show DB banner on login page if not configured
-window.addEventListener('load', () => {
-  if (!getSbConfig()) document.getElementById('loginDbBanner').style.display = 'block';
-});
+function closeResetModal() { document.getElementById('resetModal').classList.remove('open'); }
+function showModalAlert(msg,type) { document.getElementById('modalAlert').innerHTML=`<div class="alert alert-${type==='error'?'error':'success'}">${msg}</div>`; }
+function showUserAlert(msg,type) { document.getElementById('userAlert').innerHTML=`<div class="alert alert-${type==='error'?'error':'success'}">${msg}</div>`; setTimeout(()=>{ document.getElementById('userAlert').innerHTML=''; },3000); }
+document.querySelectorAll('.modal-overlay').forEach(el=>{ el.addEventListener('click',function(e){ if(e.target===this) this.classList.remove('open'); }); });
+window.addEventListener('load',()=>{ if(!getSbConfig()) document.getElementById('loginDbBanner').style.display='block'; });
 </script>
 </body>
 </html>
-
-
-
